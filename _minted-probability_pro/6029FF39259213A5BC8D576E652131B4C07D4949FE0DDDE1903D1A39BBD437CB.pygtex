@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{n}{tprecistion}\PYG{p}{(}\PYG{n}{BigFloat}\PYG{p}{,} \PYG{l+m+mi}{10000}\PYG{p}{)}
+\PYG{o}{/} \PYG{l+m+mi}{999999999999999999999998999999999999999999999999}
+\end{Verbatim}
