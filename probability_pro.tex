@@ -35,8 +35,8 @@ sorting = none]{biblatex}
 
 \usepackage{answers}
 
-\newtheorem{problem}{Задача}
-\numberwithin{problem}{section}
+%\newtheorem{problem}{Задача}
+%\numberwithin{problem}{section}
 
 \Newassociation{sol}{solution}{solution_file}
 % sol --- имя окружения внутри задач
@@ -45,6 +45,31 @@ sorting = none]{biblatex}
 % можно изменить далее по ходу
 \Opensolutionfile{solution_file}[all_solutions]
 % в квадратных скобках фактическое имя файла
+
+
+
+% магия для автоматических гиперссылок задача-решение
+\newlist{myenum}{enumerate}{3}
+% \newcounter{problem}[chapter] % нумерация задач внутри глав
+\newcounter{problem}
+
+\newenvironment{problem}%
+{%
+\refstepcounter{problem}%
+%  hyperlink to solution
+     \hypertarget{problem:{\thesection.\theproblem}}{} % нумерация внутри глав
+     % \hypertarget{problem:{\theproblem}}{}
+     \Writetofile{solution_file}{\protect\hypertarget{soln:\thesection.\theproblem}{}}
+     %\Writetofile{solution_file}{\protect\hypertarget{soln:\theproblem}{}}
+     \begin{myenum}[label=\bfseries\protect\hyperlink{soln:\thesection.\theproblem}{\thesection.\theproblem},ref=\thesection.\theproblem]
+     % \begin{myenum}[label=\bfseries\protect\hyperlink{soln:\theproblem}{\theproblem},ref=\theproblem]
+     \item%
+    }%
+    {%
+    \end{myenum}}
+% для гиперссылок обратно надо переопределять окружение
+% это происходит непосредственно перед подключением файла с решениями
+
 
 
 
@@ -3527,7 +3552,7 @@ $C_{20}^2\cdot 18$.
                framesep=2mm]{julia}
 setprecistion(BigFloat, 10000)
 1 / 999999999999999999999998999999999999999999999999
-\end{minted}   
+\end{minted}
  \item Разложите найденную функцию в сумму двух дробей и, вспомнив формулу для геометрической прогрессии, найдите явную формулу для чисел Фибоначчи.
   \end{enumerate}
 \begin{sol}
@@ -3614,6 +3639,18 @@ h_1(t) = 0.7t + 0.3th^2_1(t)
 
 
 \Closesolutionfile{solution_file}
+
+
+% для гиперссылок на условия
+% http://tex.stackexchange.com/questions/45415
+\renewenvironment{solution}[1]{%
+         % add some glue
+         \vskip .5cm plus 2cm minus 0.1cm%
+         {\bfseries \hyperlink{problem:#1}{#1.}}%
+}%
+{%
+}%
+
 \section{Решения}
 \input{all_solutions}
 
