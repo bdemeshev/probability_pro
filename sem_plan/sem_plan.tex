@@ -1,0 +1,205 @@
+\documentclass[12pt]{article}
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath} % куча стандартных математических плюшек
+
+\usepackage{comment} % добавление длинных комментариев
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+
+\usepackage{caption} % что-то делает с подписями рисунков :)
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Амбициозный план семинаров по теории вероятностей}
+\chead{}
+\rhead{2018-2019}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos — печатает все поставленные \todo'шки
+
+
+
+\usepackage{booktabs} % красивые таблицы
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec} % что-то про шрифты?
+\usepackage{polyglossia} % русификация xelatex
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+
+\usepackage[bibencoding = auto,
+backend = biber,
+sorting = none,
+style=alphabetic]{biblatex}
+
+\addbibresource{em1_pset_v2.bib}
+
+
+
+% делаем короче интервал в списках
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+
+
+\begin{document}
+
+Сентябрь: вечеринка установки софта!
+
+
+\begin{enumerate}
+  \item Вперёд в рукопашную: события, случайные величины. Вероятность и ожидание в дискретном случае. Дерево.
+  \item Метод первого шага. Рекуррентные уравнения на вероятность и ожидание.
+  \item Условная вероятность. Таблица сопряжённости. Парадокс Симпсона.
+  \item Задачи на условную вероятность и метод первого шага.
+  \item Дисперсия. Разложение случайной величины в сумму. Аддитивность ожидания.
+  \item Функция плотности и вероятностная дифференциальная форма.
+  \item Рождение распределений: от Бернулли до экспоненциального и Пуассона.
+  \item Прогулки под вершинами.
+\end{enumerate}
+
+Контрольная 1.
+
+\begin{enumerate}[resume]
+  \item Дискретное совместное распределение. Ковариации и корреляции.
+  \item Условное математическое ожидание. Функция и случайная величина.
+  \item Совместная функция плотности. Ковариации в непрерывном случае.
+  \item Долой неравенство Йенсена, Чебышёва и Маркова.
+  \item Полный беспредел: ЗБЧ и сходимость по вероятностям.
+  \item Рождение нормального распределения.
+  \item Работа с нормальным распределением. ЦПТ.
+\end{enumerate}
+
+Размышления:
+\begin{itemize}
+  \item при рассмотрении дисперсии, ковариации, корреляции подчёркивать их геометрический смысл.
+  \item Пуассоновский поток: когда?
+  \item Энтропия: когда?
+  \item Байесовский подход: уже же можно? почему он в конце?
+  \item Симуляции в R или python: когда?
+  \item Перенести рождение нормального распределения в многомерное?
+  \item Дифференциальные уравнения методом Крофтона
+\end{itemize}
+
+Контрольная 2.
+
+Промежуточный экзамен.
+
+\begin{enumerate}[resume]
+  \item Многомерное нормальное распределение.
+  \item Выборочные характеристики.
+  \item Максимально правдоподобно!
+  \item Метод моментов: один момент!
+  \item Свойства оценок: несмещённость, состоятельность, эффективность.
+  \item Информация Фишера. Неравенство Крамера-Рао для проверки эффективности.
+  \item Дисперсия и распределение ML оценки.
+  \item Дельта метод.
+  \item Проекции и выборочные характеристики.
+  \item Проекции и хи-квадрат распределение.
+  \item Распределение Стьюдента и Фишера. Доказательства!
+\end{enumerate}
+
+Размышления:
+\begin{itemize}
+  \item Стьюдент и Фишер: доказывать, что такие-то выражения имеют распределение Стьюдента или Фишера. Ввыодить их геометрический смысл.
+  Спрос на доказательства мал перед кр?
+\end{itemize}
+
+Контрольная 3.
+
+\begin{enumerate}[resume]
+  \item Доверительный интервал: общий случай и для ML-оценки.
+  \item Исторический интервал для математического ожидании и тяжёлой доли.
+  \item Проверка гипотез в общем случае. Уровень значимости.
+  \item Три классических теста. LR-тест.
+  \item Три классических теста. LM-тест и тест Вальда.
+  \item Тесты на таблицы сопряжённости: LR-тест и тест Пирсона.
+  \item Тесты и доверительные интервалы на разницу ожиданий и дисперсию.
+  \item Непараметрические тесты: Манн-Уитни и Колмогоров-Смирнов.
+  \item Байесовский подход. Явный вывод апостериорной плотности.
+  \item Байесовский подход. Алгоритмы MCMC.
+\end{enumerate}
+
+Контрольная 4.
+
+Финальный экзамен.
+
+Размышления:
+
+\begin{itemize}
+  \item Когда компьютерные занятия? В конце некоторых семинаров по чуть-чуть?
+  \item Бутстрэп?
+  \item Как-то скучно звучит, если одни тесты. Где идеи?
+  \item Практика MCMC через rethinking или лучше brms?
+  \item MCMC погибает в курсе метрики?
+\end{itemize}
+
+
+\end{document}
