@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath} % куча стандартных математических плюшек
+
+\usepackage{comment} % добавление длинных комментариев
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+
+\usepackage{caption} % что-то делает с подписями рисунков :)
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Домашние работы для сдачи :)}
+\chead{}
+\rhead{2018-2019}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos — печатает все поставленные \todo'шки
+
+
+
+\usepackage{booktabs} % красивые таблицы
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec} % что-то про шрифты?
+\usepackage{polyglossia} % русификация xelatex
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+
+\usepackage[bibencoding = auto,
+backend = biber,
+sorting = none,
+style=alphabetic]{biblatex}
+
+\addbibresource{em1_pset_v2.bib}
+
+
+
+% делаем короче интервал в списках
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+
+
+\begin{document}
+
+\section{Общие правила}
+
+\begin{enumerate}
+  \item На один раунд выставляется четыре задачи.
+  \item Из этих четырех задач нужно защитить две. Две задачи выбираются случайным образом ассистентом.
+  \item Защищать задачи нужно без использования дополнительных материалов.
+  \item За каждую задачу ставится ноль или один.
+  \item Есть одна попытка поболтать с ассистентом.
+  \item Арифметические ошибки несущественны.
+  \item При решении можно гуглить и кооперироваться, а сдавать можно только в одиночку.
+\end{enumerate}
+
+\section{Раунд 1}
+
+Срок сдачи: до 3 октября.
+
+Принимают: Матвей Зехов, Аида Чушкина, Александр Реентович, Пётр Гармидер.
+
+\begin{enumerate}
+
+  \item Редкой болезнью более всего $0.01\%$ людей.
+
+  Если человек болен, то имеющийся тест ошибочно признает его здоровым с вероятностью $5\%$
+  и наоборот, если человек здоров, тест признает человека больным с вероятностью $5\%$.
+
+  Судя по тесту, Васиссуалий болен. Какова вероятность того, что он действительно болен?
+
+  % про биномиальные коэффициенты
+  \item Игрок получает случайным образом 5 карт из колоды в 52 карты без джокеров.
+  Найдите вероятность получения комбинаций:
+
+  \begin{enumerate}
+    \item Стрит-флеш. Пять карт одной масти подряд.
+    \item Каре. Четыре карты одного достоинства и одна дополнительная карта.
+    \item Фул-хаус. Три карты одного достоинства и две другие карты одного достоинства.
+    \item Флеш. Пять карт одной масти. Исключая стрит-флеш.
+    \item Трипс. Три карты одного достоинства и две дополнительные разные карты.
+  \end{enumerate}
+
+  Комментарий: здесь нужно защитить один случайно выбираемый пункт.
+
+
+
+  % про метод первого шага
+  \item Саша и Маша подкидывают монетку до тех пор, пока не выпадет
+ последовательность РОО или РРО. Если игра закончится выпадением
+ РОО, то выигрывает Саша, если РРО, то — Маша.
+ \begin{enumerate}
+ \item Какова вероятность выиграть у Маши?
+ \item Чему равно среднее количество подбрасываний?
+ \item Чему равно среднее количество решек?
+\end{enumerate}
+
+
+Комментарий: здесь нужно защитить один случайно выбираемый пункт,
+при этом ассистент может указать любые комбинации из трёх орлов или решек для Саши и Маши.
+
+
+  \item Есть три закрытых двери. За двумя из них — по козе, за третьей автомобиль.
+  Вы выбираете одну из дверей. Допустим, Вы выбрали дверь А.
+  Ведущий шоу, чтобы поддержать интригу, не открывает сразу выбранную Вами дверь.
+  Сначала он открывает одну из дверей не выбранных Вами,
+  причем ради интриги ведущий не открывает сразу и дверь с автомобилем.
+  Допустим, ведущий открыл дверь B. И в этот момент он предлагает Вам изменить ваш выбор двери.
+
+  Имеет ли смысл изменить свой выбор?
+
+\end{enumerate}
+
+\section{Раунд 2}
+
+
+
+\end{document}
