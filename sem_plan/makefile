@@ -1,9 +1,9 @@
 # makefile: Rnw -> tex -> pdf
 # v 2.0
 # .Rnw extension is automatically added
-file_name = probability_pro
+file_name = sem_plan
 
-$(file_name).pdf: $(file_name).tex
+$(file_name).pdf: $(file_name).tex em1_pset_v2.bib
 	# protection against biber error
 	# http://tex.stackexchange.com/questions/140814/
 	rm -rf `biber --cache`
