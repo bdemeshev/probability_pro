@@ -2422,19 +2422,56 @@ $f_{X}(x)=
 \section{Многомерное нормальное}
 
 \begin{problem}
+Рассмотрим две предпосылки:
+\begin{enumerate}
+  \item[Rot] Распределение вектора не изменяется при любом повороте вектора.
+  \item[Ind] Компоненты вектора независимы.
+\end{enumerate}
+
+Каким предпосылкам удовлетворяют данные распределения
+
+\begin{enumerate}
+  \item Вектор $(X, Y)'$ равномерно распределён на множестве $\{x^2 \leq 1, \; y^2 \leq 1\}$.
+  \item Вектор $(X, Y)'$ равномерно распределён на множестве $\{x^2 + y^2 \leq 1\}$.
+  \item Вектор $(X, Y)'$ имеет функцию плотности $f(x, y) = \exp(-(x^2 + y^2)/2)/2\pi$.
+\end{enumerate}
+
+
+\begin{sol}
+ Ind, Rot, Rot + Ind
+\end{sol}
+
+\end{problem}
+
+\begin{problem}
+Какими свойствами должна обладать матрица $V$, чтобы быть матрицей поворота?
+То есть при умножении на $V$ должны сохраняться длины векторов и углы между векторами.
+
+\begin{sol}
+  Чтобы сохранялись длины векторов и углы между векторами,
+  должно сохраняться скалярное произведение. Значит $\langle Vx, Vy \rangle = \langle x, y \rangle$.
+
+  Или $x'V'Vy=x'y$. Необходимо и достаточно, чтобы $V'V=I$.
+\end{sol}
+\end{problem}
+
+
+
+
+\begin{problem}
 Теорема Хершела-Максвелла
 
-Рассмотрим замкнутую плоскую фигуру внутри которой случайно летают частицы. Обозначим $V=(X, Y)'$ — вектор скоростей случайно выбираемой частицы.
+Рассмотрим замкнутую плоскую фигуру внутри которой случайно летают частицы. Обозначим $Z=(X, Y)'$ — вектор скоростей случайно выбираемой частицы.
 
 Максвелл предположил, что:
 
 \begin{enumerate}
-  \item Распределение вектора не должно меняться при повороте фигуры на любой угол.
+  \item Распределение вектора не должно меняться при повороте вектора на любой угол.
   \item Вертикальная и горизонтальная составляющая скорости должны быть независимы.
 \end{enumerate}
 
 \begin{enumerate}
-  \item Какой вектор получится, если вектор $V$ поверхнуть на $90^{\circ}$ по часовой стрелке?
+  \item Какой вектор получится, если вектор $Z$ поверхнуть на $90^{\circ}$ по часовой стрелке?
   \item Докажите, что $X$ распределена так же, как $Y$ и также как $-Y$.
   \item Чему равное $\E(X)$? Верно ли, что $\Var(X) = \Var(Y)$?
   \item Докажите, что совместная функция плотности $f(x, y)$ представима в виде
@@ -2449,10 +2486,8 @@ f(x, y) = g(x^2)\cdot g(y^2)
   \item Докажите, что отношение $h'(t)/h(t)$ равно константе.
   \item Найдите функцию $h(t)$ с точностью до константы.
   \item Пусть $U$ — угол, а $R=\sqrt{x^2+y^2}$. Найдите совместную функцию плотности $U$ и $R$ с точностью до константы.
-  \item Найдите функцию плотсности $X$, если единицы измерения скорости выбраны так, что $\Var(X) = 1$.
+  \item Найдите функцию плотности $X$, если единицы измерения скорости выбраны так, что $\Var(X) = 1$.
 \end{enumerate}
-
-
 
 \begin{sol}
   \autocite{mukherjee2017proof}
@@ -2672,6 +2707,207 @@ Y
 
 \begin{sol}
 $Y \sim \cN(0;1)$, нет, они нормальны только по отдельности, но не в совокупности, $\Corr(X,Y)=0$. Взять $Y=XZ$, где $Z$ принимает значение $1$ с вероятностью $p=3/4$ и $-1$ с вероятностью $1-p=1/4$
+\end{sol}
+\end{problem}
+
+\section{Случайные вектора}
+
+
+\begin{problem}
+Пусть  $x = \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}$, $\E(x) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$, $\Var(x) = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$. Найдите $\E(y)$, $\Var(y)$ и $\E(z)$, если
+\begin{enumerate}
+\item $y = x - \E(x)$;
+\item $y = \Var(x)x$;
+\item $y = \Var(x)(x - \E(x))$;
+\item $y = \Var(x)^{-1}(x - \E(x))$;
+\item $y = \Var(x)^{-1/2}(x - \E(x))$;
+\item $z = (x - \E(x))'\Var(x)(x - \E(x))$;
+\item $z = (x - \E(x))'\Var(x)^{-1}(x - \E(x))$;
+\item $z = x'\Var(x)x$;
+\item $z = x'\Var(x)^{-1}x$.
+\end{enumerate}
+
+
+\begin{sol}
+
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Известно, что случайные величины $x_1$, $x_2$ и $x_3$ имеют следующие характеристики:
+\begin{enumerate}
+\item $\E(x_1) = 5$, $\E(x_2) = 10$, $\E(x_3) = 8$;
+\item $\Var  (x_1) = 6$, $\Var  (x_2) = 14$, $\Var  (x_3) = 1$;
+\item $\Cov  (x_1, x_2) = 3$, $\Cov  (x_1, x_3) = 1$, $\Cov  (x_2, x_3) = 0$.
+\end{enumerate}
+Пусть случайные величины $y_1$, $y_2$ и $y_3$, представляют собой линейные комбинации случайных величин $x_1$, $x_2$ и $x_3$:
+\[
+\begin{cases}
+y_1 = x_1 + 3x_2 - 2x_3 \\
+y_2 = 7x_1 - 4x_2 + x_3 \\
+y_3 = -2x_1 - x_2 + 4x_3 \\
+\end{cases}
+\]
+
+\begin{enumerate}
+\item Выпишите математическое ожидание и ковариационную матрицу случайного вектора $x =  \begin{pmatrix}
+x_1 & x_2 & x_3\\
+\end{pmatrix} '$.
+\item Напишите матрицу $A$, которая позволяет перейти от случайного вектора $x =  \begin{pmatrix}
+x_1 & x_2 & x_3\\
+\end{pmatrix} '$ к случайному вектору $y =  \begin{pmatrix}
+y_1 & y_2 & y_3\\
+\end{pmatrix} '$.
+\item С помощью матрицы $A$ найдите математическое ожидание и ковариационную матрицу случайного вектора $y =  \begin{pmatrix}
+y_1 & y_2 & y_3\\
+\end{pmatrix} '$.
+\end{enumerate}
+
+
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Случайные величины $w_1$ и $w_2$ независимы с нулевым ожиданием и единичной дисперсией. Из них составлено два вектора,
+$w=\left(
+\begin{array}{c}
+w_1 \\
+w_2
+\end{array}\right)$
+и
+$z=\left(
+\begin{array}{c}
+-w_2 \\
+w_1
+\end{array}\right)$
+\begin{enumerate}
+\item Являются ли векторы $w$ и $z$ перпендикулярными?
+\item Найдите $\E(w)$, $\E(z)$.
+\item Найдите $\Var(w)$, $\Var(z)$, $\Cov(w,z)$.
+\end{enumerate}
+
+
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Известна ковариационная матрица вектора $\e=(\e_1,\e_2)$,
+\[
+\Var(\e)=\left(
+\begin{matrix}
+9 & -1 \\
+-1 & 9
+\end{matrix}
+\right)
+\]
+
+Найдите четыре различных матрицы $A$, таких что вектор $v=A\e$ имеет некоррелированные компоненты с единичной дисперсией, то есть $\Var(A\e)=I$.
+
+
+\begin{sol}
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Известно, что $\Corr(X, Z) = 0.7$, $\Corr(X, Y)= 0.6$. В каких пределах может лежать корреляция $\Corr(Y, Z)$?
+
+\begin{sol}
+Корреляционная матрица должна быть положительно определена. Получаем квадратное неравенство.
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Пусть $r_1$, $r_2$ и $r_3$ — годовые доходности трёх рисковых финансовых инструментов. Пусть $\alpha_1$, $\alpha_2$ и $\alpha_3$ — доли, с которыми данные инструменты входят в портфель инвестора. Считаем, что $\sum_{i=1}^3 \alpha_i = 1$ и $\alpha_i \geqslant 0$ для всех $i=1,2,3$. Пусть $r =  \begin{pmatrix}
+r_1 & r_2 & r_3\\
+\end{pmatrix} '$, $\E (r) =  \begin{pmatrix}
+a_1 & a_2 & a_3\\
+\end{pmatrix} '$, $\Var (r) =  \begin{pmatrix}
+c_{11} & c_{12} & c_{13} \\
+c_{21} & c_{22} & c_{23} \\
+c_{31} & c_{32} & c_{33} \\
+\end{pmatrix} $. Параметры $\left\lbrace a_i \right\rbrace$ и $\left\lbrace c_i \right\rbrace$ известны.
+
+\begin{enumerate}
+\item Найдите годовую доходность портфеля $U$ инвестора.
+\item Докажите, что дисперсия доходности портфеля равна $\sum_{i=1}^3 \sum_{j=1}^3 \alpha_i c_{ij} \alpha_j$.
+\item Для случая $\alpha_1 = 0.1$, $\alpha_2 = 0.5$, $\alpha3 = 0.4$, $\E (r) =  \begin{pmatrix}
+a_1 & a_2 & a_3\\
+\end{pmatrix} ' =  \begin{pmatrix}
+0.10 & 0.06 & 0.05 \\
+\end{pmatrix} '$,
+\[
+\Var (r) =  \begin{pmatrix}
+0.04 & 0 & -0.005\\
+0 & 0.01 & 0\\
+-0.005 & 0 & 0.0025\\
+\end{pmatrix}
+\]
+найдите $\E (U)$ и $\Var (U)$.
+\end{enumerate}
+\begin{sol}
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Пусть $\xi_1, \xi_2, \xi_3$ — случайные величины, такие что $\Var (\xi_1) = 2$, $\Var (\xi_2) = 3$, $\Var (\xi_3) = 4$, $\Cov (\xi_1, \xi_2) = 1$, $\Cov (\xi_1, \xi_3) = -1$, $\Cov (\xi_2, \xi_3) = 0$.
+Пусть $\xi =  \begin{pmatrix}
+\xi_1 & \xi_2 & \xi_3 \\
+\end{pmatrix}'$. Найдите $\Var (\xi)$ и $\Var (\xi_1 + \xi_2 + \xi_3)$.
+
+
+\begin{sol}
+По определению ковариационной матрицы:
+
+$\Var (\xi) =  \begin{pmatrix}
+\Var (\xi_1) & \Cov (\xi_1, \xi_2) & \Cov (\xi_1, \xi_3) \\
+\Cov (\xi_2, \xi_1) & \Var (\xi_2) & \Cov (\xi_2, \xi_3) \\
+\Cov (\xi_3, \xi_1) & \Cov (\xi_3, \xi_2) & \Var (\xi_3) \\
+\end{pmatrix}  =  \begin{pmatrix}
+2 & 1 & -1 \\
+1 & 3 & 0 \\
+-1 & 0 & 4 \\
+\end{pmatrix} $
+
+\begin{multline*}
+\Var (\xi_1 + \xi_2 + \xi_3)  = \Var   \begin{pmatrix}
+ \begin{pmatrix}
+1 & 1 & 1 \\
+\end{pmatrix}  &  \begin{pmatrix}
+\xi_1 \\
+\xi_2 \\
+\xi_3 \\
+\end{pmatrix}
+\end{pmatrix}  = \\
+\begin{pmatrix}
+1 & 1 & 1 \\
+\end{pmatrix}  \Var   \begin{pmatrix}
+\xi_1 \\
+\xi_2 \\
+\xi_3 \\
+\end{pmatrix}   \begin{pmatrix}
+1 \\
+1 \\
+1 \\
+\end{pmatrix}  = \\
+ \begin{pmatrix}
+1 & 1 & 1 \\
+\end{pmatrix}   \begin{pmatrix}
+2 & 1 & -1 \\
+1 & 3 & 0 \\
+-1 & 0 & 4 \\
+\end{pmatrix}   \begin{pmatrix}
+1 \\
+1 \\
+1 \\
+\end{pmatrix}  = 9
+\end{multline*}
 \end{sol}
 \end{problem}
 

@@ -11,3 +11,4 @@
 *.pyg
 *.synctex.gz
 probability_pro-cache.yaml
+_minted-probability_pro/
