@@ -4181,15 +4181,15 @@ h(y) = \frac{3\exp(\alpha^{-4})}{4}(1 - \exp(2\alpha^{-4})(y+\alpha - 1)^2)
   \item При каком $c$ будет минимальной величина $MSE = \E((\hat \mu -\mu)^2)$? Возможно ли использовать такое $c$ в практической задаче?
   \item Святозар минимизирует по $\hat\mu$ штрафную функцию
   \[
-  Q(\hat\mu) = \sum (y_i - \hat\mu)^2 + \lambda \hat\mu^2.
+  Q(\hat\mu) = \sum (X_i - \hat\mu)^2 + \lambda \hat\mu^2.
   \]
   При каком $\lambda$ оценка Святозара совпадёт с несмещённой оценкой Бориславы? С оценкой минимизирующей MSE?
 \end{enumerate}
   \begin{sol}
     \begin{enumerate}
-      \item $c=1/n$, да
-      \item $c=1/(n+\sigma^2/\mu^2)$, нет, так как $\mu$ и $\sigma$ неизвестны
-      \item $\lambda=0$ и $\lambda=\sigma^2/\mu^2$
+      \item $c=1/n$, да;
+      \item $c=1/(n+\sigma^2/\mu^2)$, нет, так как $\mu$ и $\sigma$ неизвестны;
+      \item $\lambda=0$ и $\lambda=\sigma^2/\mu^2$.
     \end{enumerate}
   \end{sol}
 \end{problem}
