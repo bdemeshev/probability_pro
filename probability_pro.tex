@@ -5,7 +5,7 @@
 % File-Reopen with encoding
 % utf8 is the preferred encoding
 
-
+ 
 
 \input{title_bor_utf8_knitr}
 \input{emetrix_preamble}
@@ -4418,12 +4418,13 @@ $\hat{a}=\alpha +\beta X$.
 \end{problem}
 
 \begin{problem}
-Величины  $X_{i} $  — независимы и одинаково распределены. При
+Величины  $X_{i}$  — независимы и одинаково распределены. При
 каком значении параметра  $\beta$
 
 \begin{enumerate}
-\item оценка $2X_{1} -5X_{2} +\beta X_{3} $  будет несмещённой  для $\E\left(X_{i} \right)$ ?
-\item оценка $\beta \left(X_{1} +X_{2} -2X_{3} \right)^{2} $  будет несмещённойдля  $\Var\left(X_{i} \right)$?
+\item оценка $\hat \mu = 2X_{1} -5X_{2} +\beta X_{3} $  будет несмещённой  для $\mu = \E\left(X_{i} \right)$ ?
+\item оценка $\hat \sigma^2 = \beta \left(X_{1} +X_{2} -2X_{3} \right)^{2}$  
+      будет несмещённой для  $\sigma^2 = \Var\left(X_{i} \right)$?
 \end{enumerate}
 \begin{sol}
 
@@ -4431,11 +4432,22 @@ $\hat{a}=\alpha +\beta X$.
 \end{problem}
 
 \begin{problem}
-Величины  $X_{1} $  и  $X_{2} $  независимы и равномерны на
-$\left[0;a\right]$. При каком  $\beta $  оценка  $Y=\beta \cdot \min \left\{X_{1} ,X_{2} \right\}$  для параметра  $a$  будет
-несмещённой?
-\begin{sol}
+Величины  $X_{1}$  и  $X_{2}$  независимы и равномерны на
+$\left[0;a\right]$ и $Z = \min \{ X_1, X_2\}$.
 
+\begin{enumerate}
+  \item Для величины $Z$ найдите функцию распределения, функцию плотности, $\E(Z)$, $\Var(Z)$.
+  \item При каком $\beta$  оценка  $Y=\beta Z$  для параметра $a$ будет несмещённой?
+  \item При каком $\beta$  оценка  $Y=\beta Z$  для параметра $a$ будет обладать наименьшей 
+  среднеквадратичной ошибкой?
+\end{enumerate}
+
+\begin{sol}
+  \begin{enumerate}
+    \item $\E(Z) = a/3$, $\Var(Z) = a^2/18$, $f_Z(t) = \frac{2a - 2at}{a^2}$
+    \item $\beta = 3$
+    \item $\beta = 1/2$
+  \end{enumerate}
 \end{sol}
 \end{problem}
 
