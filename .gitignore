@@ -1,4 +1,5 @@
 all_solutions.tex
+*.toc
 *.bbl
 *.run.xml
 *.aux
