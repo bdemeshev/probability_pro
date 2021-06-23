@@ -1,4 +1,7 @@
 all_solutions.tex
+*.idx
+*.ilg
+*.ind
 *.toc
 *.bbl
 *.run.xml
