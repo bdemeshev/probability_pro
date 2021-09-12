@@ -173,9 +173,12 @@ style=alphabetic]{biblatex}
 
 
 \begin{sol}
-   N 3 4 5
-
-  2/8 3/8 3/8
+\begin{tabular}{*{4}{c}}
+\toprule
+$x$ & $3$ & $4$ & $5$  \\
+$\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
+\bottomrule
+\end{tabular}
 \end{sol}
 \end{problem}
 
@@ -186,6 +189,12 @@ style=alphabetic]{biblatex}
 \item Сколько в среднем человек должно войти в комнату, чтобы впервые произошло совпадения дней рождения?
 \end{enumerate}
 \begin{sol}
+\begin{enumerate}
+  \item 
+  \[
+  \frac{365}{365}\frac{364}{365}\frac{363}{365} \cdot \frac{336}{365} \approx 0.29  
+  \]
+\end{enumerate}
 \end{sol}
 \end{problem}
 
@@ -512,6 +521,16 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 \begin{sol}
 \end{sol}
 \end{problem}
+
+\begin{problem}
+Случайная величина $X$ равновероятно принимает значения $1$, $2$ и $3$. 
+
+Найдите $\P(\E(\P(\P(X=7)=0))=1)$ и $\E(\E(\E(\P(\P(X=1)=1))))$.
+  \begin{sol}
+    $1$ и $0$
+  \end{sol}
+\end{problem}
+
 
 
 \section{К чёрту условности!}
