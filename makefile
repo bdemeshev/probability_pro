@@ -20,4 +20,10 @@ $(file_name).pdf: $(file_name).tex
 
 
 clean:
-	-rm $(file_name).pdf $(file_name).fls $(file_name).log $(file_name).out $(file_name).aux $(file_name).fdb_latexmk $(file_name)-concordance.tex
+	-rm $(file_name).pdf 
+	-rm $(file_name).fls 
+	-rm $(file_name).log 
+	-rm $(file_name).out 
+	-rm $(file_name).aux 
+	-rm $(file_name).fdb_latexmk 
+	-rm $(file_name)-concordance.tex
