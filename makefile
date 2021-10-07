@@ -27,3 +27,14 @@ clean:
 	-rm $(file_name).aux 
 	-rm $(file_name).fdb_latexmk 
 	-rm $(file_name)-concordance.tex
+	-rm $(file_name).idx
+	-rm $(file_name).idx
+	-rm $(file_name).ilg
+	-rm $(file_name).toc
+	-rm $(file_name).ind
+	-rm $(file_name).bbl
+	-rm $(file_name).run.xml
+	-rm $(file_name).xdv
+	-rm $(file_name).bcf
+	-rm $(file_name).blg
+	-rm $(file_name).synctex.gz
