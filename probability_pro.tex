@@ -18,7 +18,13 @@
 
 
 \input{title_bor_utf8_knitr}
-\input{emetrix_preamble}
+
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+
+
+\usepackage{physics}
 
 
 \usepackage{minted}
@@ -3892,7 +3898,7 @@ $X_2^*$ равновероятно равно $X_1$, $X_2$, \ldots, $X_n$. И т
 
 \begin{equation}
 \begin{pmatrix}	X \\ 	Y 	\end{pmatrix}
-\sim \mN
+\sim \cN
 \left(
 \begin{pmatrix}
 25 \\ 125
@@ -4847,12 +4853,17 @@ $\sigma^2 = \Var\left(X_{i} \right)$  является несмещённой?
 Закон распределения величины  $X$  имеет вид
 
 \begin{enumerate}
-\item  $\begin{array}{|c|ccc|}  \hline {x_{i} } & {0} & {1} & {a} \\
-\hline {P\left(X=x_{i} \right)} & {{1\mathord{\left/ {\vphantom {1
+\item  $\begin{array}{|c|ccc|}  
+  \hline 
+  {x_{i} } & {0} & {1} & {a} \\
+\hline 
+{P\left(X=x_{i} \right)} & {{1\mathord{\left/ {\vphantom {1
 4}} \right. \kern-\nulldelimiterspace} 4} } & {{1\mathord{\left/
 {\vphantom {1 4}} \right. \kern-\nulldelimiterspace} 4} } &
 {{2\mathord{\left/ {\vphantom {2 4}} \right.
-\kern-\nulldelimiterspace} 4} } \\  \hline  \end{array}$ ;
+\kern-\nulldelimiterspace} 4} } \\  
+\hline  
+\end{array}$ ;
 \item $\begin{array}{|c|ccc|}  \hline {x_{i} } & {0} & {1} & {2} \\
 \hline {P\left(X=x_{i} \right)} & {{1\mathord{\left/ {\vphantom {1
 4}} \right. \kern-\nulldelimiterspace} 4} } & {a} &
@@ -4868,19 +4879,21 @@ $\sigma^2 = \Var\left(X_{i} \right)$  является несмещённой?
 \end{problem}
 
 \begin{problem}
-Время горения лампочки распределено экспоненциально с
-ожиданием равным  $\theta$ . Вася включил одновременно 20
-лампочек. Величина $X$  обозначает время самого первого перегорания. Как с помощью $X$  построить несмещенную оценку для  $\theta $ ?
+Время горения лампочки распределено экспоненциально с ожиданием равным  $\theta$. 
+Вася включил одновременно 20 лампочек. 
+Величина $X$  обозначает время самого первого перегорания. 
+Как с помощью $X$  построить несмещенную оценку для  $\theta $?
 \begin{sol}
-  Закон распределения $X$ также экспоненциальный, но с другим $\lambda$. Честно находим $\E(X)=\theta/20$, отсюда
-  $\hat\theta_{unbiased} = 20X$.
+  Закон распределения $X$ также экспоненциальный, но с другим $\lambda$. 
+  Честно находим $\E(X)=\theta/20$, отсюда $\hat\theta_{unbiased} = 20X$.
 \end{sol}
 \end{problem}
 
 \begin{problem}
 Величины $X_{i}$ независимы и одинаково распределены, причем
 $\Var(X_{i})=\sigma^{2}$, а $\E(X_{i})=\frac{\theta}{\theta+1}$, где
-$\theta>0$ — неизвестный параметр. С помощью $\bar{X}$ постройте состоятельную оценку для $\theta$.
+$\theta>0$ — неизвестный параметр. 
+С помощью $\bar{X}$ постройте состоятельную оценку для $\theta$.
 \begin{sol}
 
 \end{sol}
@@ -4949,6 +4962,36 @@ $\hat{\beta}_{2}=\frac{\sum{x_{i}Y_{i}}}{\sum x_{i}^{2}}$.
 Разница показаний равна $u_2 + 100 - u_1$, где $u_i$ — ошибки измерения. Замечаем, что
 $\E((u_2 - u_1)^2) = 2\sigma^2_u$. И, конечно, $(u_2 - u_1)^2$ является несмещённой оценкой
 для параметра $2\sigma^2_u$. Отсюда получаем, что $\hat\sigma^2_u = 5000$ грамм в квадрате.
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Величины $X_1$, $X_2$ независимы и имеют распределение Бернулли с параметром $p$.
+\begin{enumerate}
+  \item Постройте две разных несмещённых оценки для $p$.
+  \item Постройте две разных несмещённых оценки для $p^2$.
+  \item Существует ли несмещённая оценка для $\sqrt p$?
+  \item Для каких параметров существуют несмещённые оценки?
+\end{enumerate}
+\begin{sol}
+  \begin{enumerate}
+    \item $X_1$, $X_2$
+    \item $X_1 X_2$, $X_2 - X_1 + X_1 X_2$
+    \item Нет, так как любая оценка определяется значением в четырёх возможных точках.
+    \item Линейные комбинации $1$, $p$ и $p^2$.
+  \end{enumerate}
+    
+\end{sol}
+\end{problem}
+    
+\begin{problem}
+Величина $X$ имеет нормальное распределение $\cN(\mu, \sigma^2)$, с неизвестными параметрами.
+
+Существует ли несмещённая оценка для $\theta = \abs{\mu}$?
+\begin{sol}
+Нет
+
 \end{sol}
 \end{problem}
 
