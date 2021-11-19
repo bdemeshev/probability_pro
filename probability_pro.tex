@@ -37,11 +37,12 @@ style=alphabetic]{biblatex}
 
 \addbibresource{probability_pro.bib}
 
-\def \RR{\mathbb{R}}
-\def \cN{\mathcal{N}}
+\newcommand{\RR}{\mathbb{R}}
+
 \newcommand{\Lin}{\mathcal{L}in}
 \newcommand{\Linp}{\Lin^{\perp}}
 \DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\Med}{Med}
 
 \title{Заметки к семинарам по вероятностям}
 \author{\url{https://github.com/bdemeshev/probability_pro}}
@@ -54,7 +55,7 @@ style=alphabetic]{biblatex}
 \setlength{\parsep}{0pt}
 
 
-\DeclareMathOperator{\Med}{Med}
+
 
 
 \usepackage{answers}
@@ -104,6 +105,11 @@ style=alphabetic]{biblatex}
   linefill=\bfseries\TOCLineLeaderFill,% точечки
   pagenumberformat=\textbf
 ]{tocline}{section}
+
+
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 1]{label=\asbuk*),ref=\asbuk*}
 
 
 \begin{document}
@@ -1903,7 +1909,7 @@ $\Corr(X,Y)=1$, $\Corr(X,Z)=-1$
 Кувариация симметрична, линейна по каждому аргументу и равна нулю тогда и только тогда, 
 когда величины независимы. 
 
-Машенька Куррочкина придумал \textbf{курреляцию}, $\mathrm{Curr}(X, Y)$, 
+Машенька Куррочкина придумала \textbf{курреляцию}, $\mathrm{Curr}(X, Y)$, 
 Курреляция симметрична, линейна по каждому аргументу и всегда лежит в диапазоне $[-1; 1]$.
 
 Какие проблемы есть у кувариации и курреляции?
@@ -2125,7 +2131,7 @@ f(x, y) = \begin{cases}
 В Пуассоновском потоке с интенсивностью $\lambda$ время наступления $k$-го события распределено согласно гамма-распределению $Gamma(k, \lambda)$ и имеет вероятностную дифференциальную форму
 
 \[
-\P(Y \in [y; y+dy]) = const \cdot y^{k-1} \cdot \exp(-\lambda y), \text{ при } y\geq 0;
+\P(Y \in [y; y+dy]) = const \cdot y^{k-1} \cdot \exp(-\lambda y) \, dy, \text{ при } y\geq 0;
 \]
 
 До прихода Ёжика Медвежонок сидел на крылечке один и насчитал $k_1$ падающую звезду. А после прихода Ёжика Медвежонок насчитал ещё $k_2$ падающих звёзд. Пусть $Y_1$ и $Y_2$ — время, которое которое наблюдал за звёздами Медвежонок до и после прихода Ёжика.
@@ -2604,7 +2610,7 @@ f(Z_n) \approx \cN\left(f(\mu); \frac{(f'(\mu))^2\sigma^2}{n} \right) \text{ (п
 
 
 \begin{problem}
-  Пусть совместное распределение $X$ и $Y$ задано таблицей: \\
+Совместное распределение $X$ и $Y$ задано таблицей: \\
 \begin{tabular}{*{3}{c}}
 \toprule
 & $X=-1$ & $X=1$ \\
@@ -2622,6 +2628,7 @@ $Y=2$ & 2/8 & 1/8 \\
 \begin{sol}
 \end{sol}
 \end{problem}
+
 \begin{problem}
  Монетка выпадает орлом с вероятностью $p$. Эксперимент состоит из двух этапов. На первом этапе монетку подкидывают 100 раз и записывают число орлов, $Z$. На втором этапе монетку подбрасывают до тех пор пока не выпадет столько орлов, сколько выпало на первом этапе. Обозначим число подбрасываний монетки на втором этапе буквой $X$. \\
 Найдите $\E(X|Z)$, $\Var(X|Z)$, $\E(X)$, $\Var(X)$
@@ -2922,12 +2929,32 @@ $Q(X=x)$ & $1/4$ & $1/2$ & $1/8$ & $1/8$ \\
 \end{sol}
 \end{problem}
   
-\begin{problem}
 
-\begin{sol}
-\end{sol}
+\begin{problem}
+  Совместное распределение $X$ и $Y$ задано таблицей: 
+
+  \begin{tabular}{*{3}{c}}
+  \toprule
+  & $X=-1$ & $X=1$ \\
+  \midrule
+   $Y=-1$ & 1/8 & 4/8 \\
+  $Y=2$ & 2/8 & 1/8 \\
+  \bottomrule
+  \end{tabular}
+  
+  \begin{enumerate}
+  \item Найдите энтропию $H(X)$ и $H(Y)$.
+  \item Найдите условную энтропию $H(Y \mid X)$ и $H(X \mid Y)$.
+  \item Найдите совместную энтропию $H(X, Y)$. 
+  \item Каким всегда неравенством связаны $H(Y)$ и $H(Y \mid X)$?
+  \item Как связаны между собой $H(X)$, $H(Y \mid X)$ и $H(X, Y)$?
+  \end{enumerate}
+  
+  \begin{sol}
+  \end{sol}
 \end{problem}
   
+
 
 
 \section{Многомерное нормальное}
