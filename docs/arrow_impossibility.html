@@ -15,6 +15,25 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -47,6 +66,13 @@ ul.task-list{list-style: none;}
   <ul class="collapse">
   <li><a href="#базис-в-пространстве-всех-функций" id="toc-базис-в-пространстве-всех-функций" class="nav-link" data-scroll-target="#базис-в-пространстве-всех-функций">Базис в пространстве всех функций</a></li>
   <li><a href="#разложение-по-базису" id="toc-разложение-по-базису" class="nav-link" data-scroll-target="#разложение-по-базису">Разложение по базису</a></li>
+  <li><a href="#на-охоту-за-коэффициентами" id="toc-на-охоту-за-коэффициентами" class="nav-link" data-scroll-target="#на-охоту-за-коэффициентами">На охоту за коэффициентами</a></li>
+  <li><a href="#почти-все-коэффициенты-разложения-нули" id="toc-почти-все-коэффициенты-разложения-нули" class="nav-link" data-scroll-target="#почти-все-коэффициенты-разложения-нули">Почти все коэффициенты разложения — нули</a></li>
+  <li><a href="#ищем-диктатора" id="toc-ищем-диктатора" class="nav-link" data-scroll-target="#ищем-диктатора">Ищем диктатора</a></li>
+  </ul></li>
+  <li><a href="#насколько-нерационально-правило-простого-большинства" id="toc-насколько-нерационально-правило-простого-большинства" class="nav-link" data-scroll-target="#насколько-нерационально-правило-простого-большинства">Насколько нерационально правило простого большинства?</a>
+  <ul class="collapse">
+  <li><a href="#источники" id="toc-источники" class="nav-link" data-scroll-target="#источники">Источники</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -129,9 +155,9 @@ f(x_1, x_2, \ldots, x_n) = x_i
 <h1>Рациональность</h1>
 <p>На референдуме мы хотим выбрать упорядочить три алтернативы: А, Б и В. Поэтому на референдуме каждого жителя ждут три вопроса.</p>
 <ul>
-<li>Правда ли, что <span class="math inline">\(A &gt; B\)</span>?</li>
-<li>Правда ли, что <span class="math inline">\(B &gt; C\)</span>?</li>
-<li>Правда ли, что <span class="math inline">\(C &gt; A\)</span>?</li>
+<li>Правда ли, что <span class="math inline">\(A\)</span> лучше <span class="math inline">\(B\)</span>?</li>
+<li>Правда ли, что <span class="math inline">\(B\)</span> лучше <span class="math inline">\(C\)</span>?</li>
+<li>Правда ли, что <span class="math inline">\(C\)</span> лучше <span class="math inline">\(A\)</span>?</li>
 </ul>
 <p>Обозначим ответы горожан на первый вопрос вектором <span class="math inline">\(x\)</span>, на второй — вектором <span class="math inline">\(y\)</span>, на третий — вектором <span class="math inline">\(z\)</span>.</p>
 <p>Назовём тройку ответов на вопросы <em>рациональной</em>, если по ней можно однозначно упорядочить альтернативы.</p>
@@ -243,14 +269,116 @@ b_3 = \alpha_1 b_1 + \alpha_2 b_2 + \alpha_4 b_4 +\ldots + \alpha_8 b_8.
 </div>
 </div>
 <p>Для произвольного количества жителей <span class="math inline">\(n\)</span> базис <span class="math inline">\(B\)</span> всех функций, заданных на векторах ответах жителей, состоит из <span class="math inline">\(2^n\)</span> функций. Каждая функция базиса является перемножений некоторых <span class="math inline">\(x_i\)</span>.</p>
-<p>Для удобства обозначим элементы базиса <span class="math inline">\(B\)</span> покороче, упомянув перемножаемые номера <span class="math inline">\(x_i\)</span> в одном общем индексе. Например,</p>
+<p>&lt;— TODO: надо ли? —&gt; Для удобства обозначим элементы базиса <span class="math inline">\(B\)</span> покороче, упомянув перемножаемые номера <span class="math inline">\(x_i\)</span> в одном общем индексе. Например,</p>
 <p><span class="math display">\[
 x_{1, 2, 7} = x_1 x_2 x_7.
 \]</span></p>
 </section>
 <section id="разложение-по-базису" class="level2">
 <h2 class="anchored" data-anchor-id="разложение-по-базису">Разложение по базису</h2>
-<p>Любую функцию общественного выбора <span class="math inline">\(f\)</span> можно разложить по базису <span class="math inline">\(B\)</span>. Обозначим коэффициент перед <span class="math inline">\(x_S\)</span> как <span class="math inline">\(\hat f_S\)</span>.</p>
+<p>Разложим для тренировки пару функций по базису <span class="math inline">\(B\)</span>. Первое разложение нам понадобится для доказательства, а второе — просто неплохое упражнение на понимание.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Упражнение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Индикатор рациональности выбора <span class="math inline">\(R(a, b, c)\)</span> равна +1 для рационального выбора <span class="math inline">\((a, b, c)\)</span> и 0 для нерационального выбора из трех одинаковых чисел, <span class="math inline">\(R(1, 1, 1) = R(-1, -1, -1) =0\)</span>.</p>
+<p>Разложите функцию <span class="math inline">\(R\)</span> по базису <span class="math inline">\(B\)</span>.</p>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Решение упражнения про функцию рациональности
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>В силу симметрии нам требуется найти всего лишь четыре константы:</p>
+<p><span class="math display">\[
+R(x) = \alpha + \beta(x_1 + x_2 + x_3) + \gamma(x_1 x_2 + x_1 x_3 + x_2 x_4) + \delta x_1 x_2 x_3.
+\]</span></p>
+<p>Составляем четыре уравнения:</p>
+<p><span class="math display">\[
+\begin{cases}
+R(1, 1, 1) = \alpha + 3\beta + 3\gamma + \delta = 0 \\
+R(-1, -1, -1) = \alpha - 3\beta + 3\gamma - \delta = 0 \\
+R(1, 1, -1) = \alpha + \beta - \gamma - \delta = 1 \\
+R(-1, -1, 1) = \alpha  - \beta - \gamma + \delta = 1 \\
+\end{cases}
+\]</span></p>
+<p>Замечаем, что функция чётная, поэтому <span class="math inline">\(\beta = \delta = 0\)</span>.</p>
+<p><span class="math display">\[
+\begin{cases}
+R(1, 1, 1) = \alpha + 3\gamma  = 0 \\
+R(1, 1, -1) = \alpha - \gamma  = 1 \\
+\end{cases}
+\]</span></p>
+<p>Получаем <span class="math inline">\(\beta = \delta = 0\)</span>, <span class="math inline">\(\gamma = -1/4\)</span>, <span class="math inline">\(\alpha = 3/4\)</span> и</p>
+<p><span class="math display">\[
+R(x) = 0.75 - 0.25(x_1 x_2 + x_1 x_3 + x_2 x_4).
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Упражнение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Рассмотрим город из трёх жителей и <em>мажоритарную</em> функцию общественного выбора <span class="math inline">\(M(x_1, x_2, x_3)\)</span>. Мажоритарная функция функция <span class="math inline">\(M\)</span> выбирает тот ответ, которые выбрало большинство жителей города.</p>
+<ol type="1">
+<li><p>Разложите функцию <span class="math inline">\(M\)</span> по базису <span class="math inline">\(B\)</span>.</p></li>
+<li><p>Является ли функция <span class="math inline">\(M\)</span> рациональной?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Решение упражнения про мажоритарную функцию
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>В силу симметрии нам требуется найти всего лишь четыре константы:</p>
+<p><span class="math display">\[
+M(x) = \alpha + \beta(x_1 + x_2 + x_3) + \gamma(x_1 x_2 + x_1 x_3 + x_2 x_4) + \delta x_1 x_2 x_3.
+\]</span></p>
+<p>Если помножить на (-1) выбор каждого жителя, выбор города множится на (-1). Получается, что функция <span class="math inline">\(M\)</span> нечётная, поэтому <span class="math inline">\(\alpha = \gamma = 0\)</span>.</p>
+<p>Составляем два уравнения:</p>
+<p><span class="math display">\[
+\begin{cases}
+M(1, 1, 1) = 3\beta + \delta = 1 \\
+M(1, 1, -1) = \beta  - \delta = 1 \\
+\end{cases}
+\]</span></p>
+<p>Получаем <span class="math inline">\(\beta = 0.5\)</span>, <span class="math inline">\(\delta = -0.5\)</span>, <span class="math inline">\(\gamma = 0\)</span>, <span class="math inline">\(\alpha = 0\)</span> и</p>
+<p><span class="math display">\[
+M(x) = 0.5(x_1 + x_2 + x_3) - 0.5x_1 x_2 x_3.
+\]</span></p>
+</div>
+</div>
+</div>
+<p>Теперь разложим по базису <span class="math inline">\(B\)</span> произвольную функцию общественного выбора <span class="math inline">\(f\)</span>. Обозначим коэффициент перед <span class="math inline">\(x_S\)</span> как <span class="math inline">\(\hat f_S\)</span>.</p>
 <p><span class="math display">\[
 f  =  \hat f_{\emptyset} \cdot 1 + \hat f_1 \cdot x_1 + \ldots + \hat f_{1,2,7} x_{1,2,7} + \ldots
 \]</span></p>
@@ -258,12 +386,112 @@ f  =  \hat f_{\emptyset} \cdot 1 + \hat f_1 \cdot x_1 + \ldots + \hat f_{1,2,7} 
 <p><span class="math display">\[
 f = \sum_S \hat f_S x_S,
 \]</span></p>
-<p>где <span class="math inline">\(S\)</span> пробегает все подмножества чисел от <span class="math inline">\(1\)</span> до <span class="math inline">\(n\)</span>.</p>
-<p>Теорему Эрроу можно переформулировать. В разложении по базису <span class="math inline">\(B\)</span> рациональной единогласной функции общественного выбора все коэффициенты за одним исключением равны 0. Единственный ненулевой коэффициент это некое <span class="math inline">\(\hat f_i = 1\)</span>.</p>
+<p>где подмножество <span class="math inline">\(S\)</span> — часть множества натуральных чисел от <span class="math inline">\(1\)</span> до <span class="math inline">\(n\)</span>, <span class="math inline">\(S \subset \{1, 2, \ldots, n\}\)</span>.</p>
+<p>Теперь теорему Эрроу можно переформулировать на языке линейной алгебры.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Переформулировка теоремы Эрроу о диктаторе
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В разложении по базису <span class="math inline">\(B\)</span> рациональной единогласной функции общественного выбора <span class="math inline">\(f\)</span> все коэффициенты за одним исключением равны 0. Единственный ненулевой коэффициент это некое <span class="math inline">\(\hat f_i = 1\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="на-охоту-за-коэффициентами" class="level2">
+<h2 class="anchored" data-anchor-id="на-охоту-за-коэффициентами">На охоту за коэффициентами</h2>
+<p>В теории рядов Фурье известно <em>тождество Парсеваля</em>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Тождество Парсеваля
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+1=\langle f, f\rangle = \sum_S \hat f_S^2
+\]</span></p>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Доказательство тождество Парсеваля
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Вспомним, что скалярное произведение <span class="math inline">\(\langle f, f\rangle\)</span> считается как ожидание <span class="math inline">\(\E(f(X)f(X))\)</span> в случайном векторе <span class="math inline">\(X\)</span>, компоненты которого равновероятно равны (-1) и (+1).</p>
+<p>Замечаем, что <span class="math inline">\(f(X)f(X) = 1\)</span>, поэтому <span class="math inline">\(\langle f, f\rangle = 1\)</span>.</p>
+<p>Разложим внутри скалярного произведения каждую <span class="math inline">\(f\)</span> по базису</p>
+<p><span class="math display">\[
+\langle \sum_S \hat f_S x_S, \sum_Q \hat f_Q x_Q \rangle = 1
+\]</span></p>
+<p>Раскрываем скобки и вспоминаем, что наш базис — ортонормальный, <span class="math inline">\(\langle x_S, x_Q \rangle = 0\)</span>, если подмножества <span class="math inline">\(S\)</span> и <span class="math inline">\(Q\)</span> не совпадают, а <span class="math inline">\(\langle x_S, x_S \rangle = 1\)</span>.</p>
+<p>Тем самым,</p>
+<p><span class="math display">\[
+1=\langle f, f\rangle = \sum_S \hat f_S^2
+\]</span></p>
+</div>
+</div>
+</div>
+<p>Мы доказали, что квадраты коэффициентов <span class="math inline">\(\hat f_S^2\)</span> в сумме дают единицу. Заметим, что мажоритарная функция из упражнения удовлетворяет этому критерию, <span class="math inline">\(0.5^2 + 0.5^2 + 0.5^2 + (-0.5)^2=1\)</span>.</p>
+</section>
+<section id="почти-все-коэффициенты-разложения-нули" class="level2">
+<h2 class="anchored" data-anchor-id="почти-все-коэффициенты-разложения-нули">Почти все коэффициенты разложения — нули</h2>
+<p>Теперь мы готовы доказать, что все коэффициенты помимо коэффициентов при отдельных <span class="math inline">\(x_i\)</span> равны нулю, то есть, что функция <span class="math inline">\(f\)</span> имеет всего лишь вид</p>
+<p><span class="math display">\[
+f(x) = \alpha_1 x_1 + \alpha_2 x_2 + \ldots +\alpha_n x_n,
+\]</span></p>
+<p>а более сложные слагаемые вида <span class="math inline">\(x_1 x_7\)</span>, <span class="math inline">\(x_2 x_5 x_9\)</span> отсутствуют.</p>
+<p>… тут дописать …</p>
+</section>
+<section id="ищем-диктатора" class="level2">
+<h2 class="anchored" data-anchor-id="ищем-диктатора">Ищем диктатора</h2>
+<p>Итак, мы доказали, что функция <span class="math inline">\(f\)</span> имеет вид</p>
+<p><span class="math display">\[
+f(x) = \alpha_1 x_1 + \alpha_2 x_2 + \ldots +\alpha_n x_n.
+\]</span></p>
+<p>Заметим, что <span class="math inline">\(f\)</span> принимает только значения <span class="math inline">\((-1)\)</span> и <span class="math inline">\((+1)\)</span>, поэтому при изменении любого <span class="math inline">\(x_i\)</span> с (-1) до (+1) функция <span class="math inline">\(f\)</span> либо не должна измениться совсем, либо должна измениться ровно на 2.</p>
+<p>Следовательно, каждое <span class="math inline">\(\alpha_i\)</span> может принимать только значения <span class="math inline">\(0\)</span>, <span class="math inline">\(-1\)</span> или <span class="math inline">\(1\)</span>.</p>
+<p>Из равенства Парсеваля следует, что <span class="math inline">\(\sum \alpha_i^2=1\)</span>, поэтому ровно одно <span class="math inline">\(\alpha_i\)</span> отлично от нуля. По аксиоме единигласия это <span class="math inline">\(\alpha_i = 1\)</span>.</p>
+<p>Ура, мы доказали, теорему Эрроу. Любая рациональная единогласная функция общественного выбора является диктаторской, и имеет вид</p>
+<p><span class="math display">\[
+f(x) = x_i.
+\]</span></p>
+<p>У Джеймса Мерфи в <span class="citation" data-cites="murphy2015arrow">(<a href="#ref-murphy2015arrow" role="doc-biblioref">Murphy III 2015</a>)</span> этот кусок доказательства концептуально сложней, но трюк настолько виртуозен, что его стоит повторить.</p>
+</section>
+</section>
+<section id="насколько-нерационально-правило-простого-большинства" class="level1">
+<h1>Насколько нерационально правило простого большинства?</h1>
+<p>….</p>
+<section id="источники" class="level2">
+<h2 class="anchored" data-anchor-id="источники">Источники</h2>
+<p>В основном изложение следует статье <span class="citation" data-cites="murphy2015arrow">(<a href="#ref-murphy2015arrow" role="doc-biblioref">Murphy III 2015</a>)</span>. Немного упростил поиск коэффициентов в функции рациональности и участок доказательства с равенством нулю всех <span class="math inline">\(\alpha_i\)</span> кроме одного, добавил больше примеров.</p>
+<p>На Бесконечной салфетке Эвана Чена <span class="citation" data-cites="chen2016infinitely">(<a href="#ref-chen2016infinitely" role="doc-biblioref">Chen 2016</a>)</span> есть похожее доказательство. И это классный повод взглянуть в этот шикарный текст, если читатель его ещё не видел.</p>
+
 </section>
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-chen2016infinitely" class="csl-entry" role="doc-biblioentry">
+Chen, Evan. 2016. <span>“An Infinitely Large Napkin.”</span> Cambridge, Massachusetts: Massachusetts Institute of Technology. <a href="https://github.com/vEnhance/napkin/">https://github.com/vEnhance/napkin/</a>.
+</div>
+<div id="ref-murphy2015arrow" class="csl-entry" role="doc-biblioentry">
+Murphy III, James T. 2015. <span>“ARROW’s THEOREM BY BOOLEAN FOURIER ANALYSIS.”</span> <a href="https://intfxdx.com/downloads/arrow-boolean-fourier-2015.pdf">https://intfxdx.com/downloads/arrow-boolean-fourier-2015.pdf</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
