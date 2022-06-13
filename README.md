@@ -5,3 +5,8 @@
 Дружественный репозиторий с [подборкой контрольных НИУ ВШЭ](https://github.com/bdemeshev/probability_hse_exams/).
 
 Блог [покровка11](https://pokrovka11.wordpress.com).
+
+Заметочки:
+
+* Доказательство [теоремы Эрроу о диктаторе](https://bdemeshev.github.io/probability_pro/arrow_impossibility.html)
+* [Достаточные статистики](https://bdemeshev.github.io/probability_pro/sufficient_statistic.html)
