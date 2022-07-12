@@ -218,24 +218,33 @@ S_{5, 3} = X_1 + X_2 + 0 + Y_4 + Y_5,
 <p><span class="math display">\[
 \sum_{i=1}^n X_i = Z_{n,n} \overset{-X_n}{\longrightarrow}S_{n,n}\overset{+Y_n}{\longrightarrow}Z_{n,n-1}\overset{-X_{n-1}}{\longrightarrow} \ldots \overset{-X_2}{\longrightarrow}S_{n,2}\overset{+Y_2}{\longrightarrow}Z_{n,1}\overset{-X_1}{\longrightarrow}S_{n,1}\overset{+Y_1}{\longrightarrow}Z_{n,0}=\sum_{i=1}^n Y_i
 \]</span></p>
+<p>В схеме <span class="math inline">\(n\)</span> шагов, каждый из которых состоит из двух полушагов, удаления <span class="math inline">\(X_i\)</span> и добавления <span class="math inline">\(Y_i\)</span>.</p>
 <p>Заметим, что <span class="math inline">\(S_{n,i}\)</span> не зависит ни от <span class="math inline">\(X_i\)</span>, ни от <span class="math inline">\(Y_i\)</span>. Это пригодится.</p>
 <p>Замечаем также, что <span class="math inline">\(Z_{n,0} = Y_1 + \ldots + Y_n \sim \cN(0;1)\)</span>.</p>
-<p>В силу леммы нам достаточно доказать, что для любой трижды дифференцируемой <span class="math inline">\(h\)</span> с конечной третьей производной <span class="math inline">\(\E(h(Z_{n,n})) \to \E(h(Z_{n,0}))\)</span>.</p>
+<p>В силу леммы нам достаточно доказать, что для любой трижды дифференцируемой <span class="math inline">\(h\)</span> с ограниченными тремя производными <span class="math inline">\(\E(h(Z_{n,n})) \to \E(h(Z_{n,0}))\)</span>.</p>
 <p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> отличие этих двух ожиданий невелико,</p>
 <p><span class="math display">\[
 \abs{\E(h(Z_{n,n})) - \E(h(Z_{n,0}))} &lt; \varepsilon.
 \]</span></p>
-<p>Если мы докажем, что начиная с некоторого <span class="math inline">\(n\)</span> <em>каждая</em> мелкая разница <span class="math inline">\(\abs{\E(h(Z_{n,i})) - \E(h(Z_{n,i-1}))}\)</span> меньше <span class="math inline">\(\varepsilon/n\)</span>, то дело будет в шляпе!</p>
-<p>Остановимся на первой мелкой разнице,</p>
+<p>Посмотрим на нашу схему подмен</p>
 <p><span class="math display">\[
-h(Z_{n,n}) - h(Z_{n,n-1}) = h(X_1 + X_2 +\ldots + X_{n-1} + X_n) - h(X_1 + X_2 +\ldots + X_{n-1} + Y_n).
+h\left(\sum_{i=1}^n X_i\right)=h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})\overset{-X_{n-1}}{\longrightarrow} \ldots \overset{+Y_2}{\longrightarrow}h(Z_{n,1})\overset{-X_1}{\longrightarrow}h(S_{n,1})\overset{+Y_1}{\longrightarrow}h(Z_{n,0})=h\left(\sum_{i=1}^n Y_i\right)
 \]</span></p>
-<p>Доказательство для других случаев полностью аналогично.</p>
-<p>Наша разница <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,n-1})\)</span> теперь разбивается в две промежуточных разницы,</p>
+<p>С ростом <span class="math inline">\(n\)</span> цепочка растет, а каждый шаг по идее должен становится всё меньше. Если мы докажем, что начиная с некоторого <span class="math inline">\(n\)</span> разница</p>
+<p><span class="math display">\[
+\abs{\E(h(Z_{n,i})) - \E(h(Z_{n,i-1}))}
+\]</span></p>
+<p>от <strong>каждого</strong> шага становится меньше <span class="math inline">\(\varepsilon/n\)</span>, то дело будет в шляпе!</p>
+<p>Остановимся на первой паре полушагов,</p>
+<p><span class="math display">\[
+h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})
+\]</span></p>
+<p>Доказательство для других пар полушагов полностью аналогично.</p>
+<p>Наша разница <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,n-1})\)</span> разбивается в два полушага,</p>
 <p><span class="math display">\[
 \E h(Z_{n,n}) - \E h(Z_{n,n-1}) = \left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right) - \left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right).
 \]</span></p>
-<p>Оказывается, что обе промежуточных разницы, <span class="math inline">\(\left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right)\)</span> и <span class="math inline">\(\left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right)\)</span>, очень похожи на константу <span class="math inline">\(\E\left(\frac{h''(S_{n,n})}{2!}\right)\)</span>. И начиная с некоторого <span class="math inline">\(n\)</span> отличие каждой промежуточной разницы от этой константы будет меньше <span class="math inline">\(\varepsilon/2n\)</span>.</p>
+<p>Оказывается, что обе промежуточных разницы, <span class="math inline">\(\left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right)\)</span> и <span class="math inline">\(\left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right)\)</span>, очень похожи на константу <span class="math inline">\(\E\left(\frac{h''(S_{n,n})}{2!}\right)\)</span>. И начиная с некоторого <span class="math inline">\(n\)</span> отличие каждой промежуточной разницы от этой константы будет меньше <span class="math inline">\(\varepsilon/2n\)</span>. При взятии разницы константа <span class="math inline">\(\E\left(\frac{h''(S_{n,n})}{2!}\right)\)</span> уничтожится, и разница для целого шага окажется меньше <span class="math inline">\(\varepsilon/n\)</span>.</p>
 <p>Проведем доказательство для первой из них, <span class="math inline">\(\left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right)\)</span>. Доказательство для второй <span class="math inline">\(\left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right)\)</span> аналогично.</p>
 <p>В этот момент можно уже не писать индекс <span class="math inline">\((n,n)\)</span> у <span class="math inline">\(Z\)</span> и <span class="math inline">\(S\)</span> :)</p>
 <p>Выполним линеаризацию функции <span class="math inline">\(h(Z_{n,n})\)</span> в окрестности точки <span class="math inline">\(S_{n,n}\)</span>. Заметим предварительно, что эти точки отличаются ровно на <span class="math inline">\(X_n\)</span>, <span class="math inline">\(Z_{n,n} = S_{n,n} + Z_n\)</span>.</p>
@@ -273,7 +282,7 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 \E\abs\left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} &gt; \delta)\right) \leq E\left(\frac{M + M}{4}X_n^2I(\abs{X_n} &gt; \delta)\right)=\frac{M}{2n}\E(X_n^2I(\abs{X_n} &gt; \delta))
 \]</span></p>
 <p>Подберем <span class="math inline">\(n\)</span> настолько большим, что <span class="math inline">\(\E(X_n^2 I(\abs{X_n} &gt; \delta)) &lt; \varepsilon/2M\)</span>.</p>
-<p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,0})\)</span> на <span class="math inline">\(n\)</span> шагов, каждый шаг состоял в подмене очередного <span class="math inline">\(X_i\)</span> на аналогичный нормально распределенный <span class="math inline">\(Y_i\)</span>. Затем каждый шаг мы разбили на два полушага, удаление <span class="math inline">\(X_i\)</span> и добавление <span class="math inline">\(Y_i\)</span>. Затем мы рассмотрели для каждого полушага два подслучая, в зависимости от того, что больше <span class="math inline">\(\abs X_i\)</span> или <span class="math inline">\(\delta\)</span>.</p>
+<p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Затем мы рассмотрели для каждого полушага два подслучая, в зависимости от того, что больше <span class="math inline">\(\abs X_i\)</span> или <span class="math inline">\(\delta\)</span>.</p>
 <section id="источники" class="level2">
 <h2 class="anchored" data-anchor-id="источники">Источники</h2>
 <p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">(<a href="#ref-Chin2022ASA" role="doc-biblioref">Chin 2022</a>)</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
