@@ -104,7 +104,25 @@ div.csl-indent {
 \newcommand{\abs}[1]{\left\lvert #1 \right \rvert}
 \]</span></p>
 </div>
-<p>Перед доказательством ЦПТ нам потребуется лемма. Эта лемма позволяет от пределов вероятностей перейти к изучению пределов ожиданий гладких функций. Казалось бы, вероятности проще. Однако для гладких функций применима мощнейшая идея разложения в ряд Тейлора.</p>
+<p>Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Сходимость по распределению
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходится к <span class="math inline">\(R\)</span> по распределению, если</p>
+<p><span class="math display">\[
+\lim_{n\to\infty} \P(R_n \leq x) = \P(R\leq x) = F(x),
+\]</span></p>
+<p>в любой точке <span class="math inline">\(x\)</span>, где функция распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> непрерывна.</p>
+</div>
+</div>
+<p>Перед доказательством ЦПТ нам потребуется лемма. Эта лемма позволяет от пределов вероятностей перейти к изучению пределов ожиданий гладких функций. Казалось бы, вероятности проще, чем ожидания, да ещё каких-то ненаписанных явно гладких функций! Однако для гладких функций применима мощнейшая идея разложения в ряд Тейлора.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -115,19 +133,14 @@ div.csl-indent {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Если для любой трижды дифференцируемой действительной функций <span class="math inline">\(h\)</span> с ограниченными тремя производными выполнено условие</p>
+<p>Для того, чтобы последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходилась к <span class="math inline">\(R\)</span> по распределению достаточно того, что для любой бесконечно дифференцируемой функций <span class="math inline">\(h\)</span> с ограниченными производными выполнено условие</p>
 <p><span class="math display">\[
-\lim_{n\to\infty} \E(h(R_n)) = \E(h(R)),
+\lim_{n\to\infty} \E(h(R_n)) = \E(h(R)).
 \]</span></p>
-<p>то последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходится к <span class="math inline">\(R\)</span> по распределению, то есть,</p>
-<p><span class="math display">\[
-\lim_{n\to\infty} \P(R_n \leq x) = \P(R\leq x),
-\]</span></p>
-<p>для любой точки <span class="math inline">\(x\)</span>, в которой функция распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> непрерывна.</p>
 </div>
 </div>
 <div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -136,7 +149,7 @@ div.csl-indent {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Нам надо доказать, что при большом <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n\leq x)\)</span> не может слишком сильно отличаться от вероятности <span class="math inline">\(\P(R \leq x)\)</span> ни в большую, ни в меньшую сторону.</p>
 <p>Докажем половину утверждения, вторая половина доказывается по аналогии. Основная идея доказательства такова: вероятность <span class="math inline">\(\P(R_n \leq x)\)</span> можно заменить на ожидание <span class="math inline">\(\E(I(R_n \leq x))\)</span>, а «ступенчатый» индикатор <span class="math inline">\(I\)</span> можно сколь угодно точно приблизить гладкой много раз дифференцируемой функцией.</p>
@@ -146,7 +159,7 @@ div.csl-indent {
 \E(I(R_n \leq x)) &gt; F(x) - \varepsilon.
 \]</span></p>
 <p>Отступим от точки <span class="math inline">\(x\)</span> чуть-чуть влево, в точку <span class="math inline">\(x - \delta\)</span>. В силу непрерывности <span class="math inline">\(F\)</span> в точке <span class="math inline">\(x\)</span> размер оступа <span class="math inline">\(\delta\)</span> можно выбрать так, что <span class="math inline">\(F(x-\delta) &gt; F(x) - \varepsilon/2\)</span>.</p>
-<p>Теперь придумаем трижды дифференцируемую функцию <span class="math inline">\(h\)</span>, которая чуть-чуть занижает индикатор <span class="math inline">\(I(R_n \leq x)\)</span>. А именно, левее <span class="math inline">\(x-\delta\)</span> функция <span class="math inline">\(h\)</span> равна 1, правее <span class="math inline">\(x\)</span> функция <span class="math inline">\(h\)</span> равна нулю, а на отрезке <span class="math inline">\([x-\delta, x]\)</span> функция <span class="math inline">\(h\)</span> плавно спускается от 1 к 0. По построению,</p>
+<p>Теперь придумаем гладкую функцию <span class="math inline">\(h\)</span>, которая чуть-чуть занижает индикатор <span class="math inline">\(I(R_n \leq x)\)</span>. А именно, левее <span class="math inline">\(x-\delta\)</span> функция <span class="math inline">\(h\)</span> равна 1, правее <span class="math inline">\(x\)</span> функция <span class="math inline">\(h\)</span> равна нулю, а на отрезке <span class="math inline">\([x-\delta, x]\)</span> функция <span class="math inline">\(h\)</span> плавно спускается от 1 к 0. По построению,</p>
 <p><span class="math display">\[
 I(R_n \leq x - \delta) \leq h(R_n) \leq I(R_n \leq x).
 \]</span></p>
@@ -170,8 +183,16 @@ I(R_n \leq x - \delta) \leq h(R_n) \leq I(R_n \leq x).
 </div>
 </div>
 </div>
+<p>По доказательству видно, что лемма остается верна, если расширить класс функций до просто непрерывных или до трижды дифференцируемых с конечными производными.</p>
+<p>При желании можно сконструировать используемую в доказательстве функцию <span class="math inline">\(h\)</span> явно, например, на базе бесконечно плавно стартующей из нуля функции</p>
+<p><span class="math display">\[
+g(t) = \begin{cases}
+\exp(1/t) \text{ при } t&gt;0, \\
+0, \text{ при } t\leq 0.
+\end{cases}
+\]</span></p>
 <div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -180,7 +201,7 @@ I(R_n \leq x - \delta) \leq h(R_n) \leq I(R_n \leq x).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Докажите, что для любого <span class="math inline">\(\varepsilon\)</span> начиная с некоторого <span class="math inline">\(n\)</span> выполнено неравенство</p>
 <p><span class="math display">\[
@@ -241,7 +262,7 @@ S_{5, 3} = X_1 + X_2 + 0 + Y_4 + Y_5,
 <p>В схеме <span class="math inline">\(n\)</span> шагов, каждый из которых состоит из двух полушагов, удаления <span class="math inline">\(X_i\)</span> и добавления <span class="math inline">\(Y_i\)</span>.</p>
 <p>Заметим, что <span class="math inline">\(S_{n,i}\)</span> не зависит ни от <span class="math inline">\(X_i\)</span>, ни от <span class="math inline">\(Y_i\)</span>. Это пригодится.</p>
 <p>Замечаем также, что <span class="math inline">\(Z_{n,0} = Y_1 + \ldots + Y_n \sim \cN(0;1)\)</span>.</p>
-<p>В силу леммы нам достаточно доказать, что для любой трижды дифференцируемой <span class="math inline">\(h\)</span> с ограниченными тремя производными <span class="math inline">\(\E(h(Z_{n,n})) \to \E(h(Z_{n,0}))\)</span>.</p>
+<p>В силу леммы нам достаточно доказать, что для любой бесконечно дифференцируемой <span class="math inline">\(h\)</span> с ограниченными производными <span class="math inline">\(\E(h(Z_{n,n})) \to \E(h(Z_{n,0}))\)</span>.</p>
 </section>
 <section id="выбираем-произвольное-эпсилон" class="level2">
 <h2 class="anchored" data-anchor-id="выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</h2>
@@ -330,7 +351,7 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 <h2 class="anchored" data-anchor-id="взгляд-назад">Взгляд назад</h2>
 <p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Затем мы рассмотрели для полушага два подслучая, в зависимости от того, что больше <span class="math inline">\(\abs X_i\)</span> или <span class="math inline">\(\delta\)</span>.</p>
 <div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -339,7 +360,7 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Докажите, что для любого <span class="math inline">\(\varepsilon\)</span> начиная с некоторого <span class="math inline">\(n\)</span> выполнено условие</p>
 <p><span class="math display">\[
@@ -349,7 +370,7 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </div>
 </div>
 <div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -358,7 +379,7 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Линеаризовать также надо в окрестности точки <span class="math inline">\(S_{n,n}\)</span>, а разница <span class="math inline">\(Z_{n,n-1}-S_{n,n}\)</span> окажется равной <span class="math inline">\(Y_n\)</span>. По ожиданию и дисперсии <span class="math inline">\(Y_n\)</span> ничем не отличается от <span class="math inline">\(X_n\)</span>. Поэтому остаётся лишь полностью скопировать доказательство с заменой <span class="math inline">\(X_n\)</span> на <span class="math inline">\(Y_n\)</span>.</p>
 </div>
