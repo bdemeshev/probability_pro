@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.508">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Доказательство ЦПТ последовательной подменой слагаемых</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="clt_by_swapping_files/libs/clipboard/clipboard.min.js"></script>
+<script src="clt_by_swapping_files/libs/quarto-html/quarto.js"></script>
+<script src="clt_by_swapping_files/libs/quarto-html/popper.min.js"></script>
+<script src="clt_by_swapping_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="clt_by_swapping_files/libs/quarto-html/anchor.min.js"></script>
+<link href="clt_by_swapping_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="clt_by_swapping_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="clt_by_swapping_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="clt_by_swapping_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="clt_by_swapping_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#источники" id="toc-источники" class="nav-link active" data-scroll-target="#источники">Источники</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Доказательство ЦПТ последовательной подменой слагаемых</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand\cN{{\mathcal{N}}}
+\newcommand\P{{\mathbb{P}}}
+\newcommand\E{{\mathbb{E}}}
+\DeclareMathOperator{\plim}{plim}
+\newcommand\Var{{\mathrm{Var}}}
+\newcommand\Cov{{\mathrm{Cov}}}
+\newcommand\Corr{{\mathrm{Corr}}}
+\]</span></p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Лемма
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Пусть <span class="math inline">\(A\)</span> — множество всех (для каждой <span class="math inline">\(f \in A\)</span> найдётся константа <span class="math inline">\(M\)</span> такая, что <span class="math inline">\(\abs{f'''(x)} &lt; M\)</span> при любом <span class="math inline">\(x \in \mathbb{R}\)</span>).</p>
+<p>Если для любой трижды дифференцируемой действительной функций с ограниченной третьей производной <span class="math inline">\(h\)</span> выполнено условие</p>
+<p><span class="math display">\[
+\lim_{n\to\infty} \E(h(R_n)) = \E(h(R)),
+\]</span></p>
+<p>то последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходится к <span class="math inline">\(R\)</span> по распределению, то есть,</p>
+<p><span class="math display">\[
+\lim_{n\to\infty} \P(R_n \leq x) = \P(R\leq x),
+\]</span></p>
+<p>для любой точки <span class="math inline">\(x\)</span>, в которой функция распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> непрерывна.</p>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Доказательство леммы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Нам надо доказать, что при большом <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n\leq x)\)</span> не может слишком сильно отличаться от вероятности <span class="math inline">\(\P(R \leq x)\)</span> ни в большую, ни в меньшую сторону.</p>
+<p>Докажем половину утверждения, вторая половина доказывается по аналогии. Основная идея доказательства такова: вероятность <span class="math inline">\(\P(R_n \leq x)\)</span> можно заменить на ожидание <span class="math inline">\(\E(I(R_n \leq x))\)</span>, а «ступенчатый» индикатор <span class="math inline">\(I\)</span> можно сколь угодно точно приблизить гладкой много раз дифференцируемой функцией.</p>
+<p>Поехали. Выбираем произвольное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n \leq x) &gt; \P(R \leq x) - \varepsilon\)</span>.</p>
+<p>С помощью ожидания индикатора и функции распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> наша цель записывается так:</p>
+<p><span class="math display">\[
+\E(I(R_n \leq x)) &gt; F(x) - \varepsilon.
+\]</span></p>
+<p>Отступим от точки <span class="math inline">\(x\)</span> чуть-чуть влево, в точку <span class="math inline">\(x - \delta\)</span>. В силу непрерывности <span class="math inline">\(F\)</span> в точке <span class="math inline">\(x\)</span> размер оступа <span class="math inline">\(\delta\)</span> можно выбрать так, что <span class="math inline">\(F(x-\delta) &gt; F(x) - \varepsilon/2\)</span>.</p>
+<p>Теперь придумаем трижды дифференцируемую функцию <span class="math inline">\(g\)</span>, которая чуть-чуть занижает индикатор <span class="math inline">\(I(R_n \leq x)\)</span>. А именно, левее <span class="math inline">\(x-\delta\)</span> функция <span class="math inline">\(g\)</span> равна 1, правее <span class="math inline">\(x\)</span> функция <span class="math inline">\(g\)</span> равна нулю, а на отрезке <span class="math inline">\([x-\delta, x]\)</span> функция <span class="math inline">\(g\)</span> плавно спускается от 1 к 0. По построению,</p>
+<p><span class="math display">\[
+I(R_n \leq x - \delta) \leq g(R_n) \leq I(R_n \leq x).
+\]</span></p>
+<p>Делаем первый шаг по замене индикатора на не превосходящую его гладкую функцию <span class="math inline">\(g\)</span>:</p>
+<p><span class="math display">\[
+\P(R_n\leq x) = \E(I(R_n \leq x)) \geq \E(g(R_n)).
+\]</span></p>
+<p>Теперь выберем <span class="math inline">\(n\)</span> достаточно большим, так, чтобы</p>
+<p><span class="math display">\[
+\E(g(R_n)) \geq \E(g(R)) - \varepsilon/2.
+\]</span></p>
+<p>Теперь заменяем гладкую функцию <span class="math inline">\(g\)</span> на не превосходящий её индикатор,</p>
+<p><span class="math display">\[
+\E(g(R)) - \varepsilon/2 \geq \E(I(R \leq x-\delta)) - \varepsilon/2 = F(x-\delta) - \varepsilon/2.
+\]</span></p>
+<p>Вспоминаем, что точку <span class="math inline">\(x-\delta\)</span> мы выбрали недалеко от <span class="math inline">\(x\)</span> и получаем в итоге, что начиная с некоторого <span class="math inline">\(n\)</span></p>
+<p><span class="math display">\[
+\P(X_n \leq x) \geq F(x) - \varepsilon.
+\]</span></p>
+<p>Аналогично доказывается и вторая половина. На этот раз надо отступать от <span class="math inline">\(x\)</span> вправо в точку <span class="math inline">\(x+\delta\)</span>, и заменять индикатор <span class="math inline">\(I(R_n \leq x)\)</span> мажорирующей его гладкой функцией <span class="math inline">\(g\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Упражнение к лемме
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Докажите, что для любого <span class="math inline">\(\varepsilon\)</span> начиная с некоторого <span class="math inline">\(n\)</span> выполнено неравенство</p>
+<p><span class="math display">\[
+\P(X_n \leq x) \leq F(x) + \varepsilon.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Центральная предельная теорема
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если величины <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_2\)</span>, , независимы и одинаково распределены с конечным ожиданием <span class="math inline">\(\mu\)</span> и дисперсией <span class="math inline">\(\sigma^2\)</span>, то отмасштабированная сумма</p>
+<p><span class="math display">\[
+Z_n = \frac{\sum_{i=1}^n Q_i - \E(\sum_{i=1}^n Q_i)}{\sqrt{\Var(\sum_{i=1}^n Q_i)}}
+\]</span></p>
+<p>стремится по распределению к <span class="math inline">\(\cN(0;1)\)</span>.</p>
+</div>
+</div>
+<p>Доказательство. Для начала представим <span class="math inline">\(S_n\)</span> в виде отмасштабированных слагаемых.</p>
+<p><span class="math display">\[
+Z_n = \frac{Q_1 - \mu}{\sigma \sqrt n} + \ldots + \frac{Q_{n-1} - \mu}{\sigma \sqrt n} + \frac{Q_n - \mu}{\sigma \sqrt n} = X_1 + \ldots + X_{n-1} + X_n
+\]</span></p>
+<p>Замечаем, что <span class="math inline">\(\E(X_i) = 0\)</span>, <span class="math inline">\(\Var(X_i) = 1/n\)</span>.</p>
+<p>Теперь по тихоньку начнем менять слагаемые в правом хвосте на независимые слагаемые <span class="math inline">\(Y_i\)</span> с таким же нулевым ожиданием, такой же дисперсией <span class="math inline">\(1/n\)</span>, но нормально распределенные.</p>
+<p>Вторым индексом у <span class="math inline">\(Z_{n,k}\)</span> будем обозначать число оставшихся исходных слагаемых. Например,</p>
+<p><span class="math display">\[
+Z_n = Z_{n,n} = X_1 + \ldots + X_{n-2} +  X_{n-1} + X_n
+\]</span></p>
+<p><span class="math display">\[
+Z_{n,n-1} = X_1 + \ldots + X_{n-2} +  X_{n-1} + Y_n
+\]</span></p>
+<p><span class="math display">\[
+Z_{n,n-2} = X_1 + \ldots + X_{n-2} +  Y_{n-1} + Y_n
+\]</span></p>
+<p>И, наконец,</p>
+<p><span class="math display">\[
+Z_{n,0} = Y_1 + \ldots + Y_{n-2} +  Y_{n-1} + Y_n
+\]</span></p>
+<section id="источники" class="level2">
+<h2 class="anchored" data-anchor-id="источники">Источники</h2>
+<p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">(<a href="#ref-Chin2022ASA" role="doc-biblioref">Chin 2022</a>)</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Chin2022ASA" class="csl-entry" role="doc-biblioentry">
+Chin, Calvin Wooyoung. 2022. <span>“A Short and Elementary Proof of the Central Limit Theorem by Individual Swapping.”</span> <em>The American Mathematical Monthly</em> 129: 374–80. <a href="https://arxiv.org/abs/2106.00871">https://arxiv.org/abs/2106.00871</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
