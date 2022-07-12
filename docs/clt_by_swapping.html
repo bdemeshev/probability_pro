@@ -309,7 +309,7 @@ h(Z_{n,n}) = h(S_{n,n}) + h'(S_{n,n})X_n + \frac{h''(C)}{2!}X_n^2.
 <p><span class="math display">\[
 h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(C)}{2!}X_n^2.
 \]</span></p>
-<p>Прибавим и вычтем справа <span class="math inline">\(h''(S_{n,n})\)</span>,</p>
+<p>Прибавим и вычтем справа в числителе <span class="math inline">\(h''(S_{n,n})\)</span>,</p>
 <p><span class="math display">\[
 h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2.
 \]</span></p>
@@ -342,14 +342,14 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 <p><span class="math display">\[
 \E h(Z_{n,n}) - \E h(S_{n,n}) \in \left[ \E\left(\frac{h''(S_{n,n})}{2n}\right) - \frac{\varepsilon}{2n}; \E\left(\frac{h''(S_{n,n})}{2n}\right) + \frac{\varepsilon}{2n} \right].
 \]</span></p>
-<p>В силу того, что аналогичное диапазон верен для <span class="math inline">\(\E h(Z_{n,n-1}) - \E h(S_{n,n})\)</span>, получаем</p>
+<p>В этот же диапазон попадает и величина <span class="math inline">\(\E h(Z_{n,n-1}) - \E h(S_{n,n})\)</span>, поэтому</p>
 <p><span class="math display">\[
 \E h(Z_{n,n}) - \E h(Z_{n,n-1}) \in \left[ - \frac{\varepsilon}{n}; + \frac{\varepsilon}{n} \right].
 \]</span></p>
 </section>
 <section id="взгляд-назад" class="level2">
 <h2 class="anchored" data-anchor-id="взгляд-назад">Взгляд назад</h2>
-<p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Затем мы рассмотрели для полушага два подслучая, в зависимости от того, что больше <span class="math inline">\(\abs X_i\)</span> или <span class="math inline">\(\delta\)</span>.</p>
+<p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(\E h(Z_{n,n}) - \E h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Изменение <span class="math inline">\(\E h\)</span>, вызванное каждым шагом, состоит из разницы изменений вызванных полушагами. А изменение от каждого полушага при больших <span class="math inline">\(n\)</span> не отличается от общей константы более чем на <span class="math inline">\(\varepsilon/2n\)</span>. Поэтому каждый шаг даёт изменение не больше <span class="math inline">\(\varepsilon/n\)</span>, и вся разница <span class="math inline">\(\E h(Z_{n,n}) - \E h(Z_{n,0})\)</span> начиная с некоторого момента меньше <span class="math inline">\(\varepsilon\)</span>.</p>
 <div class="callout-caution callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
