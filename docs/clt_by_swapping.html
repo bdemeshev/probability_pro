@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Доказательство ЦПТ последовательной подменой слагаемых</title>
+<title>clt_by_swapping</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -15,25 +15,6 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -52,58 +33,14 @@ div.csl-indent {
 
 </head>
 
-<body>
+<body class="fullcontent">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#формулировка-цпт" id="toc-формулировка-цпт" class="nav-link active" data-scroll-target="#формулировка-цпт">Формулировка цпт</a></li>
-  <li><a href="#доказательство" id="toc-доказательство" class="nav-link" data-scroll-target="#доказательство">Доказательство</a>
-  <ul class="collapse">
-  <li><a href="#идея-постепенной-подмены-слагаемых" id="toc-идея-постепенной-подмены-слагаемых" class="nav-link" data-scroll-target="#идея-постепенной-подмены-слагаемых">Идея постепенной подмены слагаемых</a></li>
-  <li><a href="#выбираем-произвольное-эпсилон" id="toc-выбираем-произвольное-эпсилон" class="nav-link" data-scroll-target="#выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</a></li>
-  <li><a href="#анализ-первой-пары-полушагов" id="toc-анализ-первой-пары-полушагов" class="nav-link" data-scroll-target="#анализ-первой-пары-полушагов">Анализ первой пары полушагов</a></li>
-  <li><a href="#линеаризация-разницы-для-полушага" id="toc-линеаризация-разницы-для-полушага" class="nav-link" data-scroll-target="#линеаризация-разницы-для-полушага">Линеаризация разницы для полушага</a></li>
-  <li><a href="#два-случая-для-сложного-слагаемого" id="toc-два-случая-для-сложного-слагаемого" class="nav-link" data-scroll-target="#два-случая-для-сложного-слагаемого">Два случая для сложного слагаемого</a></li>
-  <li><a href="#взгляд-назад" id="toc-взгляд-назад" class="nav-link" data-scroll-target="#взгляд-назад">Взгляд назад</a></li>
-  <li><a href="#источники" id="toc-источники" class="nav-link" data-scroll-target="#источники">Источники</a></li>
-  </ul></li>
-  </ul>
-</nav>
-</div>
+
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Доказательство ЦПТ последовательной подменой слагаемых</h1>
-</div>
 
 
-
-<div class="quarto-title-meta">
-
-    
-    
-  </div>
-  
-
-</header>
-
-<div class="hidden">
-<p><span class="math display">\[
-\newcommand\cN{{\mathcal{N}}}
-\newcommand\P{{\mathbb{P}}}
-\newcommand\E{{\mathbb{E}}}
-\DeclareMathOperator{\plim}{plim}
-\newcommand\Var{{\mathrm{Var}}}
-\newcommand\Cov{{\mathrm{Cov}}}
-\newcommand\Corr{{\mathrm{Corr}}}
-\newcommand{\abs}[1]{\left\lvert #1 \right \rvert}
-\]</span></p>
-</div>
 <p>Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -388,16 +325,11 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </section>
 <section id="источники" class="level2">
 <h2 class="anchored" data-anchor-id="источники">Источники</h2>
-<p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">(<a href="#ref-Chin2022ASA" role="doc-biblioref">Chin 2022</a>)</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
-
+<p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">[@Chin2022ASA]</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Chin2022ASA" class="csl-entry" role="doc-biblioentry">
-Chin, Calvin Wooyoung. 2022. <span>“A Short and Elementary Proof of the Central Limit Theorem by Individual Swapping.”</span> <em>The American Mathematical Monthly</em> 129: 374–80. <a href="https://arxiv.org/abs/2106.00871">https://arxiv.org/abs/2106.00871</a>.
-</div>
-</div></section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

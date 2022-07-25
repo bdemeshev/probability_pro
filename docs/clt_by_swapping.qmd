@@ -1,16 +1,19 @@
 ---
 title: "Доказательство ЦПТ последовательной подменой слагаемых"
+lang: ru
+pdf-engine: xelatex
 format:
   html:
     toc: true
+    toc-depth: 2
   pdf:
     toc: true
+    toc-depth: 2
     number-sections: true
     colorlinks: true
+    keep-tex: true
     include-in-header: 
-      text: |
-        \usepackage{physics}
-        \usepackage{tikz}
+      - additional-header.tex
 bibliography: references.bib
 editor_options: 
   chunk_output_type: console
@@ -18,18 +21,6 @@ editor_options:
     wrap: 72
 ---
 
-::: {.hidden}
-$$
- \newcommand\cN{{\mathcal{N}}}
- \newcommand\P{{\mathbb{P}}}
- \newcommand\E{{\mathbb{E}}}
- \DeclareMathOperator{\plim}{plim}
- \newcommand\Var{{\mathrm{Var}}}
- \newcommand\Cov{{\mathrm{Cov}}}
- \newcommand\Corr{{\mathrm{Corr}}}
- \newcommand{\abs}[1]{\left\lvert #1 \right \rvert}
-$$
-:::
 
 Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению. 
 

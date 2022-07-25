@@ -6,8 +6,6 @@
 %!TeX cleanPatterns = $OUTDIR/$JOB!($OUTEXT|.synctex.gz|.tex|.pdf), /$OUTDIR/_minted-$JOB/
 \documentclass[12pt, a4paper]{article}
 
-% If you can't see cyrillic letters in R-studio choose
-% File-Reopen with encoding
 % utf8 is the preferred encoding
 
  % this magick is to solve problem that appeared after update of texlive 2018 to texlive 2020
@@ -17,42 +15,149 @@
 \makeatother
 
 
+\usepackage{fontspec} % что-то про шрифты? % нужно ли загружать?
+
+\usepackage{polyglossia} % русификация xelatex
+\usepackage{csquotes}
+
+
+\setmainlanguage{russian}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\newfontfamily\arabicfont[Script=Arabic]{Scheherazade New}
+
+
+\usepackage{etoolbox} % provides \AtEndPreamble
+% etoolbox causes wrong behavior of tocbasic
+\AtEndPreamble{ % ради арабского написания Абу ибн-Сина
+  \usepackage{arabxetex} 
+ \let\textarabic\relax 
+ \let\Arabic\relax 
+\setotherlanguages{arabic, english}
+}
+% комбо из:
+% https://tex.stackexchange.com/questions/501897
+% https://tex.stackexchange.com/questions/392175/
+
 \usepackage{imakeidx} 
 \indexsetup{level=\section}
 \makeindex[title=Модные хэштэги]
 
+\usepackage{etex} % расширение классического tex
+% в частности позволяет подгружать гораздо больше пакетов, чем мы и займёмся далее
 
-\input{title_bor_utf8_knitr}
+\usepackage{verbatim} % для многострочных комментариев
+\usepackage{makeidx} % для создания предметных указателей
 
-\newcommand{\wv}{\textrm{word2vec}}
-\newcommand \hVar{\widehat{\Var}}
-\newcommand \hCorr{\widehat{\Corr}}
-\newcommand \hCov{\widehat{\Cov}}
+\usepackage{setspace}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{mathrsfs} % sudo yum install texlive-rsfs
+\usepackage{dsfont} % sudo yum install texlive-doublestroke
+\usepackage{array, multicol, multirow, bigstrut} % sudo yum install texlive-multirow
+\usepackage{indentfirst} % установка отступа в первом абзаце главы
 
+
+\usepackage{bm}
+\usepackage{bbm} % шрифт с двойными буквами
+%\usepackage[perpage]{footmisc}
+
+\usepackage{dcolumn} % центрирование по разделителю для apsrtable
+
+% создание гиперссылок в pdf
+\usepackage[unicode, colorlinks=true, urlcolor=blue, hyperindex, breaklinks]{hyperref}
+
+
+\usepackage{microtype} % свешиваем пунктуацию
+% теперь знаки пунктуации могут вылезать за правую границу текста, при этом текст выглядит ровнее
+
+
+\usepackage{textcomp}  % Чтобы в формулах можно было русские буквы писать через \text{}
+
+% размер листа бумаги
+%\usepackage[paperwidth=145mm,paperheight=215mm,
+%height=182mm,width=113mm,top=20mm,includefoot]%{geometry}
+\usepackage[paper=a4paper, top=15mm, bottom=13.5mm, left=16.5mm, right=13.5mm, includefoot]{geometry}
+
+\usepackage{xcolor}
+
+
+% \usepackage{float, longtable}
+\usepackage{soulutf8}
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+
+\usepackage{mathtools}
+\usepackage{cancel, xspace} % sudo yum install texlive-cancel
+
+
+\usepackage{numprint} % sudo yum install texlive-numprint
+\npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
+
+
+% \usepackage{subfigure} % для создания нескольких рисунков внутри одного
+
+\usepackage{tikz, pgfplots} % язык для рисования графики из latex'a
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{trees} % tikz-прибамбас для рисовки деревьев
+\usepackage{tikz-qtree} % альтернативный tikz-прибамбас для рисовки деревьев
+\usetikzlibrary{arrows} % tikz-прибамбас для рисовки стрелочек подлиннее
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+
+\usepackage{booktabs} %  красивые таблицы
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
 
 \usepackage{physics}
-
-
 \usepackage{minted}
+\usepackage{answers}
 
-\usepackage[bibencoding = auto,
-backend = biber,
-sorting = none,
-style=alphabetic]{biblatex}
+
+
+
+\usepackage[bibencoding=auto, backend=biber, sorting=none, style=alphabetic]{biblatex}
 
 \addbibresource{probability_pro.bib}
 
-\newcommand{\RR}{\mathbb{R}}
+\setcounter{tocdepth}{1} % в оглавление оставляем уровень 1
 
-\newcommand{\Lin}{\mathcal{L}in}
-\newcommand{\Linp}{\Lin^{\perp}}
-\DeclareMathOperator{\softmax}{softmax}
-\DeclareMathOperator{\Med}{Med}
+\usepackage[titles]{tocloft} % альтернатива tocbasic для настройки toc
+% если нужен subfigure, то у tocloft можно добавить опцию subfigure
+\renewcommand{\cftbeforesecskip}{0.7pt} % поправка интервала между строками для section в toc
+\renewcommand{\cftsecdotsep}{\cftdotsep} % добавляем точечки
 
-\title{Заметки к семинарам по вероятностям}
-\author{\url{https://github.com/bdemeshev/probability_pro}}
-\date{\today}
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%  ПАРАМЕТРЫ  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setstretch{1}                          % Межстрочный интервал
+\flushbottom                            % Эта команда заставляет LaTeX чуть растягивать строки, чтобы получить идеально прямоугольную страницу
+\righthyphenmin=2                       % Разрешение переноса двух и более символов
+%\pagestyle{plain}                       % Нумерация страниц снизу по центру.
+\widowpenalty=300                     % Небольшое наказание за вдовствующую строку (одна строка абзаца на этой странице, остальное --- на следующей)
+\clubpenalty=3000                     % Приличное наказание за сиротствующую строку (омерзительно висящая одинокая строка в начале страницы)
+\setlength{\parindent}{1.5em}           % Красная строка.
+%\captiondelim{. }
+\setlength{\topsep}{0pt}
+\emergencystretch=2em
 
 % делаем короче интервал в списках
 \setlength{\itemsep}{0pt}
@@ -61,9 +166,59 @@ style=alphabetic]{biblatex}
 
 
 
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sgn}{sign}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\amn}{arg\,min}
+\DeclareMathOperator*{\amx}{arg\,max}
 
 
-\usepackage{answers}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\sCorr}{sCorr}
+\DeclareMathOperator{\sCov}{sCov}
+\DeclareMathOperator{\sVar}{sVar}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator*{\plim}{plim}
+\DeclareMathOperator{\MSE}{MSE}
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\Med}{Med}
+
+
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+\newcommand{\e}{\varepsilon}
+
+\newcommand{\cN}{\mathcal{N}}
+
+% вместо горизонтальной делаем косую черточку в нестрогих неравенствах
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+
+\newcommand{\wv}{\textrm{word2vec}}
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+
+
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\Lin}{\mathcal{L}in}
+\newcommand{\Linp}{\Lin^{\perp}}
+
+\title{Заметки к семинарам по вероятностям}
+\author{\url{https://github.com/bdemeshev/probability_pro}}
+\date{\today}
+
 
 %\newtheorem{problem}{Задача}
 %\numberwithin{problem}{section}
@@ -101,20 +256,7 @@ style=alphabetic]{biblatex}
 % это происходит непосредственно перед подключением файла с решениями
 
 
-\setcounter{tocdepth}{1} % в оглавление оставляем уровень 1
 
-%\usepackage[titles]{tocloft}
-\usepackage{tocbasic}
-\DeclareTOCStyleEntry[
-  beforeskip=.1em plus 1pt,% default is 1em plus 1pt
-  linefill=\bfseries\TOCLineLeaderFill,% точечки
-  pagenumberformat=\textbf
-]{tocline}{section}
-
-
-
-\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
-\setlist[enumerate, 1]{label=\asbuk*),ref=\asbuk*}
 
 
 \begin{document}
@@ -484,7 +626,8 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 
 
 \begin{problem}
- Упрямая исследовательница Мишель подбрасывает монетку до тех пор, пока количество орлов не окажется в точности равным удвоенному количеству решек. Монетка выпадает орлом с вероятностью $p$. Какова вероятность того, что Мишель будет подкидывать монетку вечно?
+Упрямая исследовательница Мишель подбрасывает монетку до тех пор, пока количество орлов не окажется в точности равным удвоенному количеству решек. 
+ Монетка выпадает орлом с вероятностью $p$. Какова вероятность того, что Мишель будет подкидывать монетку вечно?
 
 \begin{sol}
 \end{sol}
@@ -492,7 +635,9 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 
 
 \begin{problem}
- Исследовательница Мишель хочет встать утром с правой ноги с вероятностью $1/\sqrt{2}$, и с левой с вероятностью $1 - 1/\sqrt{2}$. Однако для проведения случайных экспериментов у неё есть только одна правильная монетка. Как с помощью правильной монетки ей добиться цели?
+Исследовательница Мишель хочет встать утром с правой ноги с вероятностью $1/\sqrt{2}$, и с левой с вероятностью $1 - 1/\sqrt{2}$. 
+Однако для проведения случайных экспериментов у неё есть только одна правильная монетка. 
+Как с помощью правильной монетки ей добиться цели?
 
 \begin{sol}
 \end{sol}
@@ -531,10 +676,10 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 \begin{problem}
 Объясните каждую интерпретацию словами, без использования факториалов.
 \begin{enumerate}
-  \item $\binom{10}{4}$ — количество строк из 4 единиц и 6 нулей
-  \item $\binom{7}{4}$ — количество строк из 4 единиц и 6 нулей, в которых единицы не идут подряд
-  \item $\binom{10}{4}$ — число способов раздать 4 яблока 10 людям, не дав никому больше одного
-  \item $\binom{13}{4}$ — число способов раздать 4 яблока 10 людям
+  \item $\binom{10}{4}$ — количество строк из 4 единиц и 6 нулей.
+  \item $\binom{7}{4}$ — количество строк из 4 единиц и 6 нулей, в которых единицы не идут подряд.
+  \item $\binom{10}{4}$ — число способов раздать 4 яблока 10 людям, не дав никому больше одного.
+  \item $\binom{13}{4}$ — число способов раздать 4 яблока 10 людям.
 \end{enumerate}
 
 \begin{sol}
@@ -550,9 +695,10 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
   \end{sol}
 \end{problem}
 
-
 \begin{problem}
-  Абу Али Хусейн ибн Абдуллах ибн аль-Хасан ибн Али ибн Сина%\footnote{ابو علی حسین بن عبدالله بن سینا}
+Абу Али Хусейн ибн Абдуллах ибн аль-Хасан ибн Али ибн Сина\footnote{
+  \textarab[utf]{ابو علی حسین بن عبدالله بن سینا}
+  }
 выбирает равномерно 10 точек на отрезке $[0;30]$.
 
 Какова вероятность того, что между любыми точками будет расстояние не меньше единицы?
@@ -569,7 +715,7 @@ $21^{10}/30^{10}$
 
 
 \begin{problem}
-  Имеется три монетки. Две «правильных» и одна — с
+Имеется три монетки. Две «правильных» и одна — с
 «орлами» по обеим сторонам. Петя выбирает одну монетку наугад и
 подкидывает её два раза. Оба раза выпадает «орел». Какова
 условная вероятность того, что монетка «неправильная»?
@@ -728,7 +874,7 @@ $\P(B|C)=0,1$. Найдите $\P(A\cup B\cup C)$.
 \end{problem}
 
 \begin{problem}
- У тети Маши — двое детей, один старше другого. Предположим, что вероятности рождения мальчика и девочки равны и не зависят от дня недели, а пол первого и второго ребенка независимы. Для каждой из четырех ситуаций найдите условную вероятность того, что у тёти Маши есть дети обоих полов.
+У тети Маши — двое детей, один старше другого. Предположим, что вероятности рождения мальчика и девочки равны и не зависят от дня недели, а пол первого и второго ребенка независимы. Для каждой из четырех ситуаций найдите условную вероятность того, что у тёти Маши есть дети обоих полов.
 \begin{enumerate}
 \item Известно, что хотя бы один ребенок — мальчик.
 \item Тетя Маша наугад выбирает одного своего
