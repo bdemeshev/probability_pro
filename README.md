@@ -12,6 +12,7 @@
 
 * Доказательство [теоремы Эрроу о диктаторе](https://bdemeshev.github.io/probability_pro/arrow_impossibility.html)
 * [Достаточные статистики](https://bdemeshev.github.io/probability_pro/sufficient_statistic.html)
+* [Доказательство ЦПТ без характеристических функций](https://bdemeshev.github.io/probability_pro/clt_by_swapping.html)
 
 ## Хочу внести свою лепту!
 
