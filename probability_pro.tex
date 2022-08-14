@@ -107,6 +107,7 @@
 \pgfplotsset{compat=1.16}
 \usetikzlibrary{trees} % tikz-прибамбас для рисовки деревьев
 \usepackage{tikz-qtree} % альтернативный tikz-прибамбас для рисовки деревьев
+\usepackage{tkz-graph} % by dp for making prob trees
 \usetikzlibrary{arrows} % tikz-прибамбас для рисовки стрелочек подлиннее
 
 \usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
@@ -292,7 +293,65 @@
 
 
 \begin{sol}
-  $\P(X=1)=3/5$, $\P(X=2)=3/10$, $\P(X=3)=1/10$, $\E(X)=1.5$
+Нарисуем дерево, обозначая в вершинах «стадии» эксперимента, в листьях – итоговый результат, а «ветки» будем подписывать вероятностями выпадения\footnote{В целях краткости и читаемости, подписи «стадий» можно обозначать символически. В нашем случае символическая запись «1х 3о» означает, что в вазе 1 конфета с орехом и 3 -- без ореха}.
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex{2x 3o}
+\SOEA[L={$X=1$}](2x 3o){X=1} 
+\SOWE(2x 3o){1x 3o}
+\SOEA[L={$X=2$}](1x 3o){X=2} 
+\SOWE(1x 3o){0x 3o}
+\SOEA[L={$X=3$}](0x 3o){X=3}
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label=$\frac{3}{5}$](2x 3o)(X=1)
+\Edge[label=$\frac{2}{5}$](2x 3o)(1x 3o)
+\Edge[label=$\frac{3}{4}$](1x 3o)(X=2)
+\Edge[label=$\frac{1}{4}$](1x 3o)(0x 3o)
+\Edge[label=$1$](0x 3o)(X=3)
+\end{tikzpicture}
+\end{center}
+
+Нас интересует вероятность события «$X=2$». 
+«Пройдёмся» по дереву, перемножая вероятности, и получим $\P(X=2) = 2/5\cdot3/4 = 3/10$.
+
+Вероятность того, что Маша съест больше одной конфеты можно посчитать двумя способами. 
+
+Заметим, всё вероятностное пространство (множество всех возможных исходов эксперимента) – это \{1, 2, 3\}.
+Значит, с одной стороны $\P(X>1) = \P(X=2) + \P(X=3) =3/10 + 2/5\cdot1/4\cdot 1 = 2/5$. 
+
+А с другой стороны, искомая вероятность равна единице минус вероятности дополнения. 
+В нашем случае дополнение – это множество их одного исхода $X=1$\footnote{В таких случаях способ через дополнение обычно приводит к ответу за меньшее число вычислений}. 
+Наконец, $\P(X>1) =  1 - \P(X=1) = 1 - 3/5$.
+
+Чтобы посчитать математическое ожидание случайной величины, надо знать её закон распределения. 
+Случайная величина $X$ дискретна (принимает не более чем счётное количество значений\footnote{В нашем случае $X$ принимает конечное множество значений}), а значит нам потребуется только таблица с всевозможными исходами $X$, и соответстующие им вероятности. 
+
+Исходы мы уже нашли – это множество \{1, 2, 3\}. Вероятности мы тоже нашли выше, а значит таблица имеет вид
+
+\begin{center}
+    \begin{tabular}{lccc}
+    	\toprule
+    	$t$ & $1$  & $2$  & $3$ \\
+    	$\P(X = t)$ & $3/5$  & $3/10$  & $1/10$ \\
+      \bottomrule
+    \end{tabular}
+\end{center}
+    
+Математическое ожидание дискретной случайной величины – это просто взвешенная по вероятностям сумма её значений, другими словами – ряд вида $\sum p_i x_i $, где $x_i$ – $i$-e значение случайной величины, а $p_i$ -- вероятность выпадения этого значения. В нашем случае 
+
+\[
+\E(X) = 1\cdot\frac{3}{5} + 2\cdot\frac{3}{10} + 3\cdot\frac{1}{10} = 1.5
+\]
+
+Попробуем разобраться, что означает равенство математического ожидания какому-то числу.
+В нашем случае неправильным будет сказать, что при очередном выполнении эксперимента, мы ожидаем увидеть исход, равный $1.5$. В конце концов, все исходы – это просто разные количества конфет, а конфет должно быть целое количество.
+
+На самом деле о математическом ожиданиии нужно думать в свете многократного выполнения эксперимента. Если мы будем заставлять Машу есть конфеты из вазы миллион раз\footnote{говоря языком статистики, посмотрим на реализации независимых случайных величин $X_1, X_2, \ldots, X_{1'000'000}$, распределение которых совпадает с распределением $X$}, иногда она будет съедать одну конфету, иногда две, а иногда три. Но значение среднего\footnote{То есть значение случайной величины $\bar{X}=(X_1 + X_2 + \ldots + X_{1'000'000})/1000000$} будет близко к 1.5\footnote{Оно будет \textit{равняться} 1.5 только при стремлении количества наблюдений к бесконечности}.
 \end{sol}
 \end{problem}
 
@@ -305,10 +364,73 @@
 \end{enumerate}
 
 \begin{sol}
-  \begin{enumerate}
-    \item $\P(X = 3) = \frac{2}{4} \frac{2}{3} \frac{1}{2} + \frac{2}{4} \frac{2}{3} \frac{1}{2}$;
-    \item $\E(X) = 2 \cdot \P(X = 2) + 3 \cdot \P(X = 3) + 4 \cdot \P(X=4)$.
-  \end{enumerate}
+Пусть $N$ -- количество извлечённых лампочек.
+Нарисуем дерево
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={2y 2n}]{s}
+\SOWE[L={1y 2n}](s){l} 
+\SOEA[L={2y 1n}](s){r}
+\SOWE[L={$N=2$}](l){ll} 
+\SOEA[L={1y 1n}](l){lr}
+\SOEA[L={2y 0n}](r){rr}
+\EA[L={1y 0n}](rr){rrr}
+\SO[L={$N=4$}](rrr){4r}
+\SOWE[L={$N=3$}](lr){lrl}
+\SOEA[L={1y 0n}](lr){lrr}
+\SOEA[L={$N=4$}](lrr){lrrr}
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label=$\frac{1}{2}$](s)(l)
+\Edge[label=$\frac{1}{2}$](s)(r)
+\Edge[label=$\frac{1}{3}$](l)(ll)
+\Edge[label=$\frac{2}{3}$](l)(lr)
+\Edge[label=$\frac{2}{3}$](r)(lr)
+\Edge[label=$\frac{1}{3}$](r)(rr)
+\Edge[label=1](rr)(rrr)
+\Edge[label=1](rrr)(4r)
+\Edge[label=$\frac{1}{2}$](lr)(lrl)
+\Edge[label=$\frac{1}{2}$](lr)(lrr)
+\Edge[label=1](lrr)(lrrr)
+\end{tikzpicture}
+\end{center}
+
+а) Требуется найти вероятность $\P(N=3)$. 
+Исход $N=3$ может произойти двумя способами.
+Следуя по стрелочкам, получим 
+
+\[
+P(N=3) = \frac{1}{2}\cdot\frac{2}{3}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{2}{3}\cdot\frac{1}{2} = \frac{1}{2}
+\]
+
+б) Чтобы найти математическое ожидание, найдём закон распределения $N$. 
+Случайная величина дискретна и принимает значения \{2, 3, 4\}\footnote{Другими словами, множество элементарных исходов  -- это \{2, 3, 4\}}. 
+Найдём вероятности каждого из исходов
+
+\begin{flalign*}
+& \P(N=2) = \frac{1}{2}\cdot\frac{1}{3}=\frac{1}{6}\\
+& \P(N=4) = 1 - \P(N=2) - \P(N=3) = 1 - \frac{1}{6} – \frac{1}{2} = \frac{1}{3}
+\end{flalign*}
+
+Мы нашли закон распределения и можем записать его в виде таблицы
+
+\begin{center}
+    \begin{tabular}{lccc}
+    	\toprule
+    	$t$ & $2$  & $3$  & $4$ \\
+    	$\P(X = t)$ & $1/6$  & $1/2$  & $1/3$ \\
+      \bottomrule
+    \end{tabular}
+\end{center}
+
+Теперь посчитать математическое ожидание не составит труда
+$$
+\E(X) = 2\cdot\frac{1}{6} + 3\cdot\frac{1}{2} + 4\cdot\frac{1}{3} = \frac{19}{6}
+$$
 \end{sol}
 \end{problem}
 
@@ -320,6 +442,65 @@
 Найдите вероятности $\P(X=0)$, $\P(X=1)$, \ldots и ожидание $\E(X)$.
 
 \begin{sol}
+Нарисуем дерево (подписи рёбер опустим, так как вероятность всегда равна $\frac{1}{2}$)
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L=старт]{s}
+\SOWE[L=О](s){l} 
+\SOEA[L=Р](s){r}
+\SOWE[L={ОО, $X=2$}](l){ll} 
+\NOWE[L={ОР, $X=1$}](l){lu}
+\SOEA[L=РР](r){rr}
+\SOEA[L=РО](l){rl}
+\SOWE[L={РОО, $X=2$}](rl){rll}
+\SetGraphUnit{4}
+\SO[L={РОР, $X=1$}](rl){rlr}    
+\SO[L={РРО, $X=1$}](rr){rrl}
+\SetGraphUnit{2}
+\SOEA[L={РРР, $X=0$}](rr){rrr}
+\tikzset{EdgeStyle/.style={->}}
+\Edge(s)(l)
+\Edge(s)(r)
+\Edge(l)(ll)
+\Edge(l)(lu)
+\Edge(r)(lr)
+\Edge(r)(rr)
+\Edge(rr)(rrr)
+\Edge(rr)(rrl)
+\Edge(rl)(rll)
+\Edge(rl)(rlr)
+\end{tikzpicture}
+\end{center}
+
+Следуя по «веткам», получим
+
+\begin{flalign*}
+& \P(X=0) = \P(\text{PPP}) = \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2} = \frac{1}{8}\\
+& \P(X=1) = \P(\text{OO}) + \P(\text{POP}) + \P(\text{PPO}) = \frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2} = \frac{1}{2}\\
+& \P(X=2) = \P(\text{OO}) + \P(\text{POO}) = \frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2} = \frac{3}{8}
+\end{flalign*}
+
+Таблица случайной величины имеет вид
+
+\begin{center}
+    \begin{tabular}{lccc}
+    	\toprule
+    	$t$ & $0$  & $1$  & $2$ \\
+    	$\P(X = t)$ & $1/8$  & $1/2$  & $3/8$ \\
+      \bottomrule
+    \end{tabular}
+\end{center}
+
+Значит математическое ожидание равно
+
+\[
+\E(X) = 0\cdot\frac{1}{8} + 1\cdot\frac{1}{2} + 2\cdot\frac{3}{8} = \frac{9}{8}
+\]
 \end{sol}
 \end{problem}
 
@@ -334,12 +515,74 @@
 
 
 \begin{sol}
-\begin{tabular}{*{4}{c}}
-\toprule
-$x$ & $3$ & $4$ & $5$  \\
-$\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
-\bottomrule
-\end{tabular}
+Нарисуем дерево (подписи рёбер опустим, так как вероятность всегда равна $\frac{1}{2}$).
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L=0:0]{s}
+\SOWE[L=1:0](s){l} 
+\SOEA[L=0:1](s){r}
+\SOWE[L=2:0](l){ll} 
+\SOEA[L=1:1](l){lr}
+\SOEA[L=0:2](r){rr}
+\SOWE[L={3:0, $N=3$}](ll){lll}
+\SOEA[L=2:1](ll){llr}
+\SOWE[L={3:1, $N=4$}](llr){llrl}
+\SOEA[L=2:2](llr){llrr}
+\SOEA[L={0:3, $N=3$}](rr){rrr}
+\SOWE[L=1:2](rr){rrl}
+\SOEA[L={1:3, $N=4$}](rrl){rrlr}
+\SOWE[L={3:2, $N=5$}](llrr){llrrl}
+\SOEA[L={2:3, $N=5$}](llrr){llrrr}
+\tikzset{EdgeStyle/.style={->}}
+\Edge(s)(l)
+\Edge(s)(r)
+\Edge(l)(ll)
+\Edge(l)(lr)
+\Edge(r)(lr)
+\Edge(r)(rr)
+\Edge(rr)(rrr)
+\Edge(rr)(rrl)
+\Edge(lr)(rrl)
+\Edge(lr)(llr)
+\Edge(ll)(llr)
+\Edge(ll)(lll)
+\Edge(llr)(llrl)
+\Edge(llr)(llrr)
+\Edge(rrl)(llrr)
+\Edge(rrl)(rrlr)
+\Edge(llrr)(llrrl)
+\Edge(llrr)(llrrr)
+
+\end{tikzpicture}
+\end{center}
+
+Следуя по «веткам», получим
+
+\begin{flalign*}
+& \P(N=3) = \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2} = \frac{1}{4}\\
+& \P(N=4) = 6 \cdot \frac{1}{2^4} = \frac{3}{8}\\
+& \P(N=5) = 1 - \frac{1}{4} - \frac{3}{8} = \frac{3}{8}
+\end{flalign*}
+
+Таблица
+
+\begin{center}
+    \begin{tabular}{lccc}
+    	\toprule
+    	$t$ & $3$  & $4$  & $5$ \\
+    	$\P(N = t)$ & $1/8$  & $1/2$  & $3/8$ \\
+      \bottomrule
+    \end{tabular}
+\end{center}
+
+Тогда математическое ожидание $E(X) = 0\cdot\frac{1}{8} + 1\cdot\frac{3}{8} + 2\cdot\frac{3}{8} = \frac{9}{8}$
+
+$\P(N \text{-- чётное}) = \P(N=4) = \frac{3}{8}$
 \end{sol}
 \end{problem}
 
@@ -350,12 +593,47 @@ $\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
 \item Сколько в среднем человек должно войти в комнату, чтобы впервые произошло совпадения дней рождения?
 \end{enumerate}
 \begin{sol}
-\begin{enumerate}
-  \item 
-  \[
-  \frac{365}{365}\frac{364}{365}\frac{363}{365} \cdot \frac{336}{365} \approx 0.29  
-  \]
-\end{enumerate}
+а) Представим, что 30 человек собираются в одной комнате и входят по очереди.
+Пусть имя первого -- Aлексей, второго -- Bлад, третьего -- Саша.
+
+В комнату зашёл Aлексей, теперь заходит Bлад. 
+Вероятность совпадения их дней рождения равна $1/365\cdot1/365\cdot 365=1/365$\footnote{Потому что вероятность одинаково наугад выбрать 2 одинаковых дня в году равна $1/365\cdot1/365$, а всего дней 365}.
+Значит вероятность не совпадения дней рождения равна $364/365$.
+Теперь заходит Cаша. 
+Дни рождения людей в комнате не совпадают только если они не совпали до появления Cаши, и день рождения Cаши не совпал ни с днём рождения Aлексея, ни с днём рождения Bлада.
+Другими словами, вероятность не совпадения равна\footnote{В первом переходе использована теорема Моргана, и чертой обозначается дополнение}
+
+\begin{align*}
+    & \frac{364}{365}\cdot\P(\text{Алексей и Саша родились в разные дни И Влад и Саша родились в разные дни)}=\\
+    & \frac{364}{365}\cdot\P(\overline{\text{Алексей и Саша родились один день ИЛИ Влад и Саша родились в один день)}}=\\
+    & \frac{364}{365}\cdot\left[1 - \P(\text{Алексей и Саша родились один день ИЛИ Влад и Саша родились в один день)}\right]=\\
+    & \frac{364}{365}\cdot\left[1 - \P(\text{Алексей и Саша родились один день}) - \P(\text{Влад и Саша родились в один день)}\right]=\\
+    & \frac{364}{365}\cdot\left[1 - \frac{1}{365} - \frac{1}{365}\right] = \frac{364}{365}\cdot\frac{363}{365}
+\end{align*}
+
+Очевидно, такая логика распространяется на сколь угодно много человек в комнате. 
+Для того, чтобы понять, какой множитель будет последним в случае 30 человек, обозначим вероятность не совпадения дней рождения после захода $i$-го человека в комнату за $p_i$.
+Тогда
+
+\[
+p_1 = \frac{365}{365} = 1, \quad p_2 = \frac{364}{365}, \quad p_3 = \frac{364}{365}\cdot\frac{363}{365}, \quad p_{30} = \text{?}
+\]
+
+Заметим, сумма нижнего индекса $p_i$ и числителя последнего множителя всегда равняется $366$, а значит 
+
+\[
+p_{30} = \frac{364}{365}\cdot\frac{363}{365}\cdot\ldots\cdot\frac{332}{336}\approx 0.29, \quad p_n = \frac{364}{365}\cdot\frac{363}{365}\cdot\ldots\cdot\frac{366-n}{365} = \frac{364!}{(365-n)!}\cdot\frac{1}{365^{n-1}}
+\]
+
+б) Вероятность хотя бы одного совпадения равна единице за вычетом вероятности не совпадения. 
+Значит, искомая вероятность для $n$ человек в комнате равна
+
+\[
+\P(\text{хотя бы одно совпадение дней рождения}) = 1 -\frac{364!}{(365-n)!}\cdot\frac{1}{365^{n-1}} = f(n)
+\]
+
+Остаётся найти решение неравенства $f(n)>1/2$.
+Оказывается, уже при 23 людях неравенство выполняется.
 \end{sol}
 \end{problem}
 
@@ -368,7 +646,63 @@ $\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
 Сколько в среднем раз они будут бросать кубик?
 
 \begin{sol}
- $6/11$, $6$
+Нарисуем дерево
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={Бросает Маша}]{s}
+\SOWE[L={Моет Маша}](s){l} 
+\SOEA[L={Бросает Саша}](s){r}
+\SOWE[L={Моет Саша}](r){rl} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label={$\frac{1}{6}$}](s)(l)
+\Edge[label={$\frac{5}{6}$}](s)(r)
+\Edge[label={$\frac{1}{6}$}](r)(lr)
+\Edge[label={$\frac{5}{6}$}, style={bend right}](r)(s)
+\end{tikzpicture}
+\end{center}
+
+Пусть $p$ -- вероятность, что Маша будет мыть посуду, если она бросает кубик. 
+Тогда верно следующее равенство
+
+\[
+p = \frac{1}{6} + \frac{5}{6}\cdot\frac{5}{6}\cdot p, \quad p = \frac{6}{11}
+\]
+
+Пусть $\mu$ -- математическое ожидание бросков, если Маша бросает кубик. 
+Тогда верно следующее равенство
+
+\[
+\mu = \frac{1}{6}\cdot 1 + \frac{5}{6}\cdot\frac{1}{6}\cdot 2 + \frac{5}{6}\cdot\frac{5}{6}\cdot (\mu + 2), \quad \mu = 6
+\]
+
+Альтернативный подход к нахождению ожидания: заметим, когда мы думаем о количестве подбрасываний, совершенно неважно кто их делает.
+
+Дерево можно перерисовать так
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={Монету сейчас бросят}]{s}
+\SOWE[L={Кто-то моет}](s){l} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label={$\frac{1}{6}$}](s)(l)
+\Loop[dist=5cm, style={very thick}, label={$\frac{5}{6}$}, labelstyle={fill=white}, dir=EA,style={->}](s)
+\end{tikzpicture}
+\end{center}
+
+А значит 
+
+\[
+\mu = \frac{1}{6}\cdot 1 + \frac{5}{6}\cdot(\mu + 1), \quad \mu = 6
+\]
 \end{sol}
 \end{problem}
 
@@ -378,15 +712,30 @@ $\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
 
 
 \begin{sol}
-  $N$ — количество подбрасываний, $G$ — количество орлов, $R$ — решек
+Нарисуем дерево
 
-  $\E(N)=10/7$, $\E(G)=1$, $\E(R)=10/7-1=3/7$
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={старт}]{s}
+\SOWE[L={орёл}](s){l} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label={$p$}](s)(l)
+\Loop[dist=3cm, style={very thick}, label={$1-p$}, labelstyle={fill=white}, dir=EA,style={->}](s)
+\end{tikzpicture}
+\end{center}
 
-  Для вероятности чётного числа бросков можно сложить ряд или составить уравнение.
-  Если выпала решка, то в продолжении игры мы хотим получить нечётное количество бросков.
-  \[
-     v = 0.7 \cdot 0 + 0.3 \cdot (1-v)
-  \]
+Пусть $\mu_n$, $\mu_o$, $\mu_p$ -- ожидания числа бросков, числа орлов и числа решек соответственно.
+Верны следующие равенства
+
+\begin{align*}
+    & \mu_n = 0.7\cdot 1 + 0.3\cdot (\mu_n + 1), \quad \mu_n = \frac{1}{0.7} = \frac{1}{p}\\
+    & \mu_o = 0.7\cdot 1 + 0.3\cdot \mu_o, \quad \mu_o = 1\\
+    & \mu_p = 0.7\cdot 0 + 0.3\cdot(\mu_p + 1), \quad \mu_p = \frac{0.3}{0.7} = \frac{1-p}{p} = \frac{1}{p} - 1
+\end{align*}
 \end{sol}
 \end{problem}
 
@@ -419,7 +768,143 @@ $\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
 \end{enumerate}
 
 \begin{sol}
-  у Саши $3/4$.
+
+Нарисуем дерево
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={старт}]{s}
+\SOWE[L={О}](s){l} 
+\SOEA[L={Р}](s){r} 
+\SOWE[L={ОО}](l){ll} 
+\SO[L={ООР, Маша win}](ll){lld} 
+\SOWE[L={РО}](r){rl} 
+\SO[L={РОО, Саша win}](rl){rld} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label=О](s)(l)
+\Edge[label=Р](s)(r)
+\Edge[label=Р](l)(r)
+\Edge[label=О](l)(ll)
+\Edge[label=Р](ll)(lld)
+\Edge[label=О, style={bend right}](r)(rl)
+\Edge[label=О](rl)(rld)
+\Loop[dist=2cm, style={very thick}, label=О, labelstyle={fill=white}, dir=WE,style={->}](ll)
+\Loop[dist=2cm, style={very thick}, label=Р, labelstyle={fill=white}, dir=EA,style={->}](r)
+\Edge[label=Р, style={bend right}](rl)(r)
+\end{tikzpicture}
+\end{center}
+
+а) Пусть $a$ -- вероятность выигрыша Маши, если она находится в старте, $b$ -- вероятность выигрыша Маши, если она находится в «О» и так далее, как на рисунке ниже
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={a}]{s}
+\SOWE[L={b}](s){l} 
+\SOEA[L={c}](s){r} 
+\SOWE[L={d}](l){ll} 
+\SO[L={m}](ll){lld} 
+\SOWE[L={e}](r){rl} 
+\SO[L={s}](rl){rld} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge(s)(l)
+\Edge(s)(r)
+\Edge(l)(r)
+\Edge(l)(ll)
+\Edge(ll)(lld)
+\Edge[style={bend right}](r)(rl)
+\Edge(rl)(rld)
+\Loop[dist=2cm, style={very thick}, dir=WE,style={->}](ll)
+\Loop[dist=2cm, style={very thick}, dir=EA,style={->}](r)
+\Edge[style={bend right}](rl)(r)
+\end{tikzpicture}
+\end{center}
+
+Тогда верна система уравнений
+
+\[
+\begin{cases}
+    a=\frac{1}{2}\cdot b + \frac{1}{2}\cdot c\\
+    b = \frac{1}{2}\cdot d + \frac{1}{2}\cdot c\\
+    c = 0
+\end{cases}, \quad a=\frac{1}{4}
+\]
+
+б) Все случаи, когда подбрасываний четыре -- это «abddm», «abces», «acces».
+Значит $\P(X=4)=3\cdot1/2^4=3/16$.
+
+Все случаи, когда решка одна -- это «abces», «acces» и все случаи вида «abd\ldots dm». 
+Все последние случаи возникают при попадании в «d», а значит вероятность всех случаев равна вероятности «abd».
+$\P(Y=1) = 1/4 + 1/8 + 1/16 = 7/16$
+Пусть теперь $a, b, c, \ldots$ -- ожидания количества бросков с соответствующих позиций. 
+Тогда верна система уравнений
+
+\[
+\begin{cases}
+    a=\frac{1}{2}\cdot b + \frac{1}{2}\cdot c\\
+    b = \frac{1}{2}\cdot d + \frac{1}{2}\cdot c\\
+    c = \frac{1}{2}\cdot (c+1) + \frac{1}{2}\cdot e\\
+    d = \frac{1}{2}\cdot d + \frac{1}{2}\cdot 1\\
+    e = \frac{1}{2}\cdot c + \frac{1}{2}\cdot 1
+\end{cases}
+\]
+
+Эти уравнения линейно независимы по построению, всего их пять, и неизвестных тоже 5. 
+Значит найдётся единственное решение.
+
+Пусть теперь $a, b, c, \ldots$ -- ожидания количества решек с соответствующих позиций. 
+Тогда верна система уравнений
+
+\[
+\begin{cases}
+    a=\frac{1}{2}\cdot b + \frac{1}{2}\cdot (c+1)\\
+    b = \frac{1}{2}\cdot d + \frac{1}{2}\cdot (c+1)\\
+    c = \frac{1}{2}\cdot (c+1) + \frac{1}{2}\cdot e\\
+    d = \frac{1}{2}\cdot d + \frac{1}{2}\cdot 1\\
+    e = \frac{1}{2}\cdot (c+1) + \frac{1}{2}\cdot 0
+\end{cases}
+\]
+
+Здесь тоже найдётся единственное решение.
+
+в) Нарисуем дерево
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={старт}]{s}
+\SOWE[L={О}](s){l} 
+\SOEA[L={Р}](s){r} 
+\SOWE[L={ОО}](l){ll} 
+\SO[L={ООР, Маша win}](ll){lld} 
+\SOWE[L={ОР}](r){rl} 
+\SO[L={ОРО, Саша win}](rl){rld} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label=О](s)(l)
+\Edge[label=Р](s)(r)
+\Edge[label=О](r)(l)
+\Edge[label=О](l)(ll)
+\Edge[label=Р](ll)(lld)
+\Edge[label=Р](rl)(r)
+\Edge[label=Р](l)(rl)
+\Edge[label=О](rl)(rld)
+\Loop[dist=2cm, style={very thick}, label=О, labelstyle={fill=white}, dir=WE,style={->}](ll)
+\Loop[dist=2cm, style={very thick}, label=Р, labelstyle={fill=white}, dir=EA,style={->}](r)
+\end{tikzpicture}
+\end{center}
+
+Остальные пункты аналогичные.
+
 \end{sol}
 \end{problem}
 
@@ -452,7 +937,46 @@ $\P(X=x)$ & $2/8$ & $3/8$ & $3/8$ \\
  Найдите $\P(X=4)$, $\E(X)$.
 
 \begin{sol}
-  $\P(X=4)=1/8$, $\E(X)=3$
+
+Нарисуем дерево
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={старт}]{s}
+\SOWE[L={m}](s){l} 
+\SOEA[L={f}](s){r} 
+\SOWE[L={m f}](r){rl} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge(s)(l)
+\Edge(s)(r)
+\Edge(r)(rl)
+\Edge(l)(rl)
+\Loop[dist=2cm, style={very thick}, dir=EA,style={->}](r)
+\Loop[dist=2cm, style={very thick}, dir=WE,style={->}](l)
+\end{tikzpicture}
+\end{center}
+
+Все случаи, когда детей четыре -- это «mmmf» и «fffm», значит $\P(X=4) = 2\cdot1/2^4=1/8$.
+
+Пусть $a, b, c$ -- ожидания количества детей из стадий «старт», «m», «f» соответственно.
+Тогда верна система уравнений
+
+\[
+\begin{cases}
+    a=\frac{1}{2}\cdot b + \frac{1}{2}\cdot c\\
+    b =\frac{1}{2}\cdot (b+1) + \frac{1}{2}\cdot 2\\
+    c =\frac{1}{2}\cdot (c+1) + \frac{1}{2}\cdot 2
+\end{cases}, \quad
+\begin{cases}
+    a = b = c\\
+    2b = b+1+2
+\end{cases}, \quad a=3
+\]
+
 \end{sol}
 \end{problem}
 
@@ -469,6 +993,39 @@ $0.5$ — против часовой стрелки.
 \end{enumerate}
 
 \begin{sol}
+
+Нарисуем диаграмму с изначальным расположением ежей.
+Цифры -- имена ежей, буквы -- названия вершин. 
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L={$A$, 1}]{A}
+\SOWE[L={$C$, 3}](A){C} 
+\SOEA[L={$B$, 2}](A){B} 
+\tikzset{EdgeStyle/.style={<->}}
+\Edge[label={$p$}](A)(B)
+\Edge[label={$p$}](A)(C)
+\Edge[label={$p$}](B)(C)
+\end{tikzpicture}
+\end{center}
+
+$\P(T=1)$: Без ограничения общности, пусть ежи встречаются в вершине $A$.
+Чтобы сделать это за один ход, $2\to A$, $3\to A$. 
+Но ёж 1 тоже обязан куда-то передвинуться, поэтому за один ход встречи точно не произойдёт (вероятность равна нулю).
+
+$\P(T=2)$: Рассмотрим случай встречи в вершине $A$. 
+На первом ходу $2$ и $3$ не идут в $A$ сразу (иначе на втором ходу придётся оттуда уходить), то есть они меняются местами; $1$ может ходить куда угодно. 
+Вероятность этого равна $p^2$.
+
+На втором ходу все три ежа должны прийти в $A$.
+Вероятность этого равна $p^3$.
+
+Случаи встречи в $B$ и $C$ аналогичны, а значит итоговая вероятность равна $3 \cdot p^2 \cdot p^3$.
+
 \end{sol}
 \end{problem}
 
@@ -481,6 +1038,16 @@ $0.5$ — против часовой стрелки.
 $\P(\text{они будут разного цвета})$?
 
 \begin{sol}
+
+\begin{align*}
+    \P(\text{разного}) & = \P(\text{первый красный, второй чёрный}) + \P(\text{первый чёрный, второй красный})=\\
+    & = \frac{1}{2} \cdot \frac{1}{1+2} + \frac{1}{2} \cdot \frac{1}{2+1} = \frac{2}{3}
+\end{align*}
+
+
+Сумма в знаменателе -- количество оставшихся тузов. 
+После выбора одной карты останется один туз такого же цвета и два -- противоположного.
+
 \end{sol}
 \end{problem}
 \begin{problem}
@@ -488,7 +1055,15 @@ $\P(\text{они будут разного цвета})$?
  Найдите\footnote{Событие $A^c$ — это событие противоположное событию $A$, иногда обозначается $\bar{A}$} $\P(A^{c} \cap B^{c} )$.
 
 \begin{sol}
-  $\P(A^{c} \cap B^{c} ) = 0.3$
+
+Несовместные события -- такие, что $\P(A\cup B) = \P(A) + \P(B)$ или $\P(A\cap B) = \varnothing$. 
+
+По теореме Моргана 
+
+\[
+\P(A^с \cap B^с) = \P(\overline{A\cup B}) = 1-\P(A\cup B) = 1-\P(A)-\P(B) = 1-0.7=0.3
+\]
+
 \end{sol}
 \end{problem}
 
@@ -496,6 +1071,30 @@ $\P(\text{они будут разного цвета})$?
  Вероятность $\P(A)=0.3$,  $\P(B)=0.8$. В каких пределах может лежать $\P(A\cap B)$?
 
 \begin{sol}
+
+По теореме сложения
+
+\[
+\P(A\cup B) = \P(A)+\P(B) - \P(A\cap B), \quad \P(A\cap B) = \P(A)+\P(B) - \P(A\cup B) = 1.1-\P(A\cup B)
+\]
+
+Минимальное значение достигается при максимуме $\P(A\cup B)$.
+Когда максимальна вероятность, что $A$ или $B$ произойдёт?
+Тогда, когда они меньше всего происходят вместе. 
+В идеале -- когда они вообще не происходят вместе, то есть являются несовместными.
+Но в случае несовместных событий $\P(A\cup B)=\P(A)+\P(B)$, что больше единицы в нашем случае. 
+То есть события $A$ и $B$ всё-таки неизбежно будут иногда происходить одновременно.
+Значит минимальное значение равно $1.1 - 1 = 0.1$.
+
+Максимальное значение достигается при минимуме $\P(A\cup B)$. 
+Когда минимальна вероятность, что $A$ или $B$ произойдёт?
+Тогда, когда они больше всего происходят вместе. 
+В идеале -- когда одно из событий происходит всегда, когда происходит второе. 
+Но тогда $\P(A\cup B)=\max\{\P(A), \P(B)\}=0.8$.
+Значит максимальное значение равно $1.1 - 0.8 = 0.3$.
+
+Нагляднее всего это видно на диаграме Венна.
+
 \end{sol}
 \end{problem}
 
@@ -511,6 +1110,25 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 
 
 \begin{sol}
+
+$X=2$ означает, что жило поколение первой амёбы (она одна), жили её дети, и эти дети не произвели потомство. 
+Значит $\P(X=2) = 3/4 \cdot 1/4^2$.
+
+По дереву видно
+
+\[
+\P(X=3) = \frac{3}{4}\cdot\left(\frac{3}{4}\cdot\frac{1}{4}\right)\cdot\frac{1}{4^2}+\frac{3}{4}\cdot\left(\frac{3}{4}\right)^2\cdot\left(\frac{1}{4}\right)^4
+\]
+
+Пусть вероятность произвести потомство $q=3/4$, искомая вероятность $\P(X=\infty)=p$.
+Тогда верно равенство 
+
+\[
+p=q\cdot (1 - (1-p)^2), \quad p=\frac{2q-1}{q}=\frac{2}{3}
+\]
+
+Потому что у отдельной амёбы будет бесконечное потомство, если она произведёт потомство\footnote{Вероятность этого равна $q$}, и не случится ситуации, что у обоих потомков не будет бесконечного потомства\footnote{У одного потомка не будет бесконечного потомства с вероятностью $1-p$, у двух -- $(1-p)^2$}.
+
 \end{sol}
 \end{problem}
 
@@ -521,7 +1139,32 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 Какова вероятность того, что после всех нажатий телевизор будет
 включен, если сейчас он выключен?
 \begin{sol}
-  1/2
+
+Пусть вероятность срабатывания при $i$-ом нажатии равна $p_i$, то есть
+
+\[
+p_1 = \frac{1}{2}, \quad \frac{1}{2}>p_2>p_3>\ldots > p_{100}
+\]
+
+Пусть $q_i$ -- вероятность, что телевизор включен после $i$-го нажатия. 
+Понятно, $q_1 = p_1 = 1/2$.
+Требуется найти $q_{100}$.
+
+Чтобы телевизор оказался включённым после 2-го нажатия, он мог либо быть включённым после 1-го нажатия, и пульт не сработал; либо быть выключенным после 1-го нажатия, и пульт сработал.
+То есть
+
+\begin{align*}
+    q_2 & = \P(\text{ТВ вкл после 1-го нажатия})\cdot\P(\text{Кнопка не сработала}) + \\
+    & + \P(\text{ТВ выкл после 1-го нажатия})\cdot\P(\text{Кнопка сработала}) =\\
+    & = (1-q_1)p_1 + q_1(1-p_1) = \frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2} = \frac{1}{2}
+\end{align*}
+
+Аналогично
+
+\[
+q_3=(1-q_2)p_2 + q_2(1-p_2) = \frac{1}{2}p^2 + \frac{1}{2}(1-p_2) = \frac{1}{2}, \quad q_{100} = \frac{1}{2}
+\]
+
 \end{sol}
 \end{problem}
 
@@ -532,9 +1175,92 @@ $\P(\{b,c\})=0,7$. Найдите $\P(\{a\})$, $\P(\{b\})$, $\P(\{c\})$
 
 
 \begin{sol}
-  $\E(X)=0.25\cdot 2 + 0.5\cdot (\E(X)+1)+0.25\cdot (\E(X)+2)$
 
-  $\E(Y)=0.25\cdot 0 + 0.5\cdot (\E(Y)+1)+0.25\cdot (\E(Y)+1)$
+По условию вероятность орла равна $p$.
+Нарисуем дерево
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L=старт]{s}
+\SetGraphUnit{4}
+\SOWE[L=О](s){l} 
+\SOEA[L=Р](s){r}
+\SetGraphUnit{2}
+\SOWE[L={ОО}](l){ll} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge[label={О, $p$}](s)(l)
+\Edge[label={Р, $1-p$}](s)(r)
+\Edge[style={bend left}, label={P, $1-p$}](l)(r)
+\Edge[style={bend left}, label={O, $p$}](r)(l)
+\Edge[label={O, $p$}](l)(ll)
+\Loop[dist=3cm, style={very thick}, label={P, $1-p$}, labelstyle={fill=white}, dir=EA,style={->}](r)
+\end{tikzpicture}
+\end{center}
+
+Пусть $a, b, c$ -- ожидания количества бросков из позиций, как на рисунке ниже
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L=a]{s}
+\SetGraphUnit{4}
+\SOWE[L=b](s){l} 
+\SOEA[L=c](s){r}
+\SetGraphUnit{2}
+\SOWE[L=конец](l){ll} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge(s)(l)
+\Edge(s)(r)
+\Edge[style={bend left}](l)(r)
+\Edge[style={bend left}](r)(l)
+\Edge(l)(ll)
+\Loop[dist=3cm, style={very thick}, dir=EA,style={->}](r)
+\end{tikzpicture}
+\end{center}
+
+Заметим, $a=c$, так как стрелки из этих позиций ведут в одинаковые состояния.
+Это также видно напрямую
+
+\[
+\begin{cases}
+    a=p(b+1)+(1-p)(c+1)\\
+    c = p(b+1) + (1-p)(c+1)
+\end{cases}
+\]
+
+Тогда верна система уравнений
+
+\[
+\begin{cases}
+    a=p(b+1)+(1-p)(a+1)\\
+    b=p+(1-p)(a+1)
+\end{cases}, \quad a=\frac{p+1}{p^2}=6
+\]
+
+Пусть $a, b, c$ -- ожидания количества решек из соответствующих позиций, тогда верна система уравнений
+
+\[
+\begin{cases}
+  a = pb + (1-p)(c+1)\\
+  b = p\cdot 0 + (1-p)(c+1)\\
+  c = pb + (1-p)(c+1)
+\end{cases}, \quad
+\begin{cases}
+  a = pb + (1-p)(c+1)\\
+  a = c\\
+  a=pb+b=(p+1)b
+\end{cases}, \quad a = \frac{p}{p+1}a+(1-p)(a+1)
+\]
+
+Откуда $a = 1/p^2 - 1 = 3$
+
 \end{sol}
 \end{problem}
 
