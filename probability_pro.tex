@@ -1290,6 +1290,31 @@ q_3=(1-q_2)p_2 + q_2(1-p_2) = \frac{1}{2}p^2 + \frac{1}{2}(1-p_2) = \frac{1}{2},
 в среднем потребуется, чтобы найти сыр?
 
 \begin{sol}
+
+Нарисуем дерево, вероятности перехода из стадии в стадию опустим, они равны $1/3$
+
+\begin{center}
+\begin{tikzpicture}
+\GraphInit[vstyle=Normal] 
+\SetGraphUnit{2}
+\SetVertexNormal[Shape = rectangle, LineWidth = 1pt]
+\tikzset{VertexStyle/.append  style={fill}}
+\Vertex[L=коридор]{s}
+\SetGraphUnit{2}
+\SO[L={$X=1$}](s){d} 
+\tikzset{EdgeStyle/.style={->}}
+\Edge(s)(d)
+\Loop[dist=3cm, style={very thick}, label={$t + 2$}, labelstyle={fill=white}, dir=EA,style={->}](s)
+\Loop[dist=3cm, style={very thick}, label={$t + 1$}, labelstyle={fill=white}, dir=WE,style={->}](s)
+\end{tikzpicture}
+\end{center}
+
+Пусть $\mu$ -- ожидание времени нахождения сыра, тогда имеет место уравнение
+
+\[
+\mu = \frac{1}{3}\cdot1 + \frac{1}{3}\cdot(\mu + 1) + \frac{1}{3}\cdot(\mu + 2), \quad\mu = 4 
+\]
+
 \end{sol}
 \end{problem}
 
