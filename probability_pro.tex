@@ -233,6 +233,34 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 
 
 
+% from Blitzstein
+
+
+\newcommand{\dBern}{\mathrm{Bern}}
+\newcommand{\dPois}{\mathrm{Pois}}
+\newcommand{\dBin}{\mathrm{Bin}}
+\newcommand{\dMult}{\mathrm{Mult}}
+\newcommand{\dGeom}{\mathrm{Geom}}
+\newcommand{\dNHGeom}{\mathrm{NHGeom}}
+\newcommand{\dHGeom}{\mathrm{HGeom}}
+\newcommand{\dDUnif}{\mathrm{DUnif}}
+\newcommand{\dFS}{\mathrm{FS}}
+\newcommand{\dNBin}{\mathrm{NBin}}
+
+\newcommand{\dTri}{\mathrm{Triangle}}
+\newcommand{\dUnif}{\mathrm{Unif}}
+\newcommand{\dCauchy}{\mathrm{Cauchy}}
+\newcommand{\dN}{\mathcal{N}}
+\newcommand{\dLN}{\mathcal{LN}}
+\newcommand{\dExpo}{\mathrm{Expo}}
+\newcommand{\dBeta}{\mathrm{Beta}}
+\newcommand{\dGamma}{\mathrm{Gamma}}
+\newcommand{\dWei}{\mathrm{Wei}}
+\newcommand{\dLogistic}{\mathrm{Logistic}}
+\newcommand{\dRayleigh}{\mathrm{Rayleigh}}
+\newcommand{\dPareto}{\mathrm{Pareto}}
+
+
 
 
 \newcommand{\Lin}{\mathcal{L}in}
@@ -3070,8 +3098,12 @@ X, \text{ если } X\geq a.\\
 \addtag{функция распределения}
 \end{problem}
 
+
+
+
+
 \newpage
-\section{Рождение распределений}
+\section{Брат Бернулли}
 
 
 \begin{problem}
@@ -3108,6 +3140,42 @@ X, \text{ если } X\geq a.\\
 \begin{sol}
 \end{sol}
 \end{problem}
+
+
+
+
+\begin{problem}
+У Илона Маска 10 монеток, которые выпадают орлом с вероятностью $p$.
+Илон Маск подкидывает монетки одновременно. 
+Обозначим с помощью $X$ количество монеток, выпавших орлом. 
+Илон Маск любит орлов, поэтому все монетки, которые выпали решкой, 
+он подкидывает ещё раз. 
+Обозначим с помощью $Y$ количество монеток, лежащих орлом вверх
+после двух подбрасываний. 
+
+\begin{enumerate}
+  \item Найдите $\P(X = 5)$, $\P(Y = 5)$.
+  \item Найдите $\P(X = k)$, $\P(Y = k)$.
+  \item Найдите ожидания $\E(X)$ и $\E(Y)$.
+  \item Найдите наиболее вероятные значения величин $X$ и $Y$.
+  \item Найдите наименее вероятные значения величин $X$ и $Y$.
+\end{enumerate}
+  \begin{sol}
+    Обозначим $p=0.3$ и $n=10$.
+    Вероятность того, что монетка хотя бы раз выпадет орлом равна $a = 1 - (1-p)^2 = 2p-p^2$.
+
+    Замечаем, что $X \sim \dBin(n, p)$ и $Y \sim \dBin(n, a)$.
+  \end{sol}
+\end{problem}
+
+
+
+
+
+\newpage
+\section{Рождение распределений}
+
+
 
 
 
@@ -3175,6 +3243,8 @@ X, \text{ если } X\geq a.\\
 \end{sol}
 \end{problem}
 
+  
+  
 
 
 \newpage
