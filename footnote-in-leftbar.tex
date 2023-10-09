@@ -1,0 +1,140 @@
+% from
+% https://tex.stackexchange.com/questions/14501/making-footnote-work-in-leftbar-environment/15182#15182
+
+% \usepackage{etoolbox} % for "\pretocmd".
+\makeatletter
+%
+% User command, see the end of the preamble for use.
+% We redefine the environment by adding "\savefoot@begin" at
+% the beginning, and "\savefoot@end" at the end.
+%
+\newcommand{\DeclareSavefootEnvironment}[1]{%
+  \expandafter\pretocmd\csname #1\endcsname
+              {\savefoot@begin}{}{\savefoot@patch@error{#1}}%
+  \expandafter\pretocmd\csname end#1\endcsname
+              {\savefoot@end}{}{\savefoot@patch@error{#1}}%
+}
+\newcommand{\savefoot@patch@error}[1]{%
+  \PackageError{savefoot}{etoolbox failed to patch the environment #1, sorry}{}}
+%
+% Register allocation.
+%
+\newcount\c@savefoot@depth
+\newtoks\savefoot@toks
+%
+% "\savefoot@begin" starts an environment which saves footnotes.
+% We only want to output footnotes outside any such environment,
+% so we count how deep we are in this kind of environment using
+% the count "\c@savefoot@depth", which pretends to be a LaTeX
+% counter.
+%
+% We will store all the "\footnotetext" into the toks
+% "\savefoot@toks". This is initialized _locally_ at the start
+% of each "savefoot" environment.
+%
+\newcommand{\savefoot@begin}{%
+  \advance\c@savefoot@depth by 1\relax
+  \savefoot@toks={}}
+%
+% When ending a savefoot environment, we check if it was the
+% outermost one. In that case, "\@secondoftwo", we output the
+% "\footnotetext" that we saved, after the end of the group.
+% The "\endgroup" must be explicitly there; this is the case
+% because of how "\end{...}" works in LaTeX2e.
+%
+% Since the register "\savefoot@toks" is restored at the end
+% of the group, we need to expand it inside the group, then
+% send "\savefoot@append{<expanded \savefoot@toks>}" after the
+% "\endgroup", hence the "\expandafter"s. Same thing when we
+% need to typeset.
+%
+\newcommand{\savefoot@end}{%
+  \ifnum\c@savefoot@depth>\@ne
+  \expandafter\@firstoftwo
+  \else
+  \expandafter\@secondoftwo
+  \fi
+  {% Nested, don't output, save to the level above.
+    \expandafter\do@after@explicit@endgroup\expandafter{%
+      \expandafter\savefoot@append\expandafter{\the\savefoot@toks}}%
+  }%
+  {% Outside, output.
+    \expandafter\do@after@explicit@endgroup\expandafter{%
+      \the\savefoot@toks}%
+  }%
+}
+%
+% Appending to a toks is standard.
+%
+\newcommand{\savefoot@append}[1]{%
+  \savefoot@toks\expandafter{\the\savefoot@toks#1}}%
+%
+% To put after "\endgroup", we need delimited parameters,
+% hence the "\def". We first check that the command is new,
+% just in case.
+%
+\newcommand{\do@after@explicit@endgroup}{}
+\def\do@after@explicit@endgroup#1#2\endgroup{#2\endgroup#1}
+%
+% Now the footnote command. We save the old definition,
+% used in the case where we are outside any savefoot
+% environment. If we are inside a savefoot environment,
+% place the "\footnotemark", and append
+%
+%    \savefoot@setcounter{<explicit number>}\footnotetext{<text>}
+%
+% to our register. This will be typeset at the end. We cannot
+% just do "\footnotetext[<explicit number>]{<text>}", because
+% the hyperref package does not like that.
+%
+\let\savefoot@old@footnote\footnote
+\renewcommand{\footnote}[1]{%
+  \ifnum\c@savefoot@depth>\z@
+  \expandafter\@firstoftwo
+  \else
+  \expandafter\@secondoftwo
+  \fi
+  {% Inside a leftbar, save the text in the relevant toks.
+    \footnotemark
+    \savefoot@toks=\expandafter{%
+      \the\expandafter\savefoot@toks
+      \expandafter\savefoot@setcounter\expandafter{\the\c@footnote}%
+      \footnotetext{#1}%
+    }%
+  }%
+  {% Don't save, just typeset.
+    \savefoot@old@footnote{#1}%
+  }%
+}
+%
+% When not using hyperref, just give the counter "footnote"
+% the right value (in that case, "\savefoot@hhyperref@support{#1}"
+% will be defined to do nothing).
+%
+\newcommand{\savefoot@setcounter}[1]{%
+  \setcounter{footnote}{#1}%
+  \savefoot@hyperref@support{#1}%
+}
+%
+% Getting "\footnotetext" and "\footnotemark" to work with hyperref
+% is non-trivial, and I probably did something wrong. But at first
+% sight it seems ok.
+%
+\newcommand{\savefoot@hyperref@support}[1]{%
+  \setcounter{Hfootnote}{#1}%
+  \global \let \Hy@saved@currentHlabel \@currentHlabel
+  \global \let \Hy@saved@currentHref \@currentHref
+  \hyper@makecurrent {Hfootnote}%
+  \global \let \Hy@footnote@currentHlabel \@currentHlabel
+  \global \let \Hy@footnote@currentHref \@currentHref
+  \global \let \@currentHlabel \Hy@saved@currentHlabel
+  \global \let \@currentHref \Hy@saved@currentHref
+}
+%
+% If hyperref is not loaded, we disable the hyperref support.
+% We check at the "\begin{document}".
+%
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{}{\let\savefoot@hyperref@support\@gobble}%
+}
+\makeatother
