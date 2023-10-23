@@ -3,6 +3,17 @@
 %% arara: xelatex: {shell: yes}
 %% arara: xelatex: {shell: yes}
 
+
+% Здесь мы держим компромисс между красотой и легкостью включения новых людей в процесс создания.
+% Поэтому не используем пакеты, которые требуют возни с установкой и настройкой.
+% Например, используем listings вместо minted.
+% Пакет minted требует настроенного питона и связки латех-питон. 
+% Вместо arara используем классический latexmk. 
+
+
+
+
+
 %!TeX cleanPatterns = $OUTDIR/$JOB!($OUTEXT|.synctex.gz|.tex|.pdf), /$OUTDIR/_minted-$JOB/
 \documentclass[12pt, a4paper]{article}
 
@@ -90,7 +101,7 @@
 \usepackage[paper=a4paper, top=15mm, bottom=13.5mm, left=16.5mm, right=13.5mm, includefoot]{geometry}
 
 \usepackage{xcolor}
-\usepackage{framed} % для рамок и черты слева от минитеории
+\usepackage{framed} % для рамок и черты слева от минитеории, \leftbar
 
 % \usepackage{float, longtable}
 \usepackage{soulutf8}
@@ -131,7 +142,7 @@
 % 5. Повторяющееся значение повторяйте, а не говорите "то же"
 
 \usepackage{physics}
-% \usepackage{minted} % moved to listings to simplify development
+
 \usepackage{listings}
 \lstset{%
 basicstyle=\fontfamily{lmtt}\bfseries,
@@ -356,12 +367,6 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 \newcommand{\dLogistic}{\mathrm{Logistic}}
 \newcommand{\dRayleigh}{\mathrm{Rayleigh}}
 \newcommand{\dPareto}{\mathrm{Pareto}}
-
-
-
-
-\newcommand{\Lin}{\mathcal{L}in}
-\newcommand{\Linp}{\Lin^{\perp}}
 
 
 \newcommand{\addtag}[1]{\index{#1}}
@@ -1758,6 +1763,13 @@ $\P({b}) = \P({a,b}) - \P({a}) = \P({b,c}) - \P({c}) = 0.5$
 
 
 \section{Начала Евклида}
+
+% TODO: альтернативное название: Выйду ночью в плоскость с конём
+
+% TODO: добавить задачу про монаха, идущего на гору Фудзи и вниз
+
+% TODO: добавить задачу про Плюк, три пепелаца и связь между ними
+
 
 \begin{problem}
 Байден и Трамп приходят в случайный момент времени от полуночи до часа ночи в Белый Дом независимо друг от друга.
