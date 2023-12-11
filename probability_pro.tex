@@ -221,6 +221,7 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 }
 \newcommand{\KL}{\mathrm{KL}\kldivx}
 \newcommand{\CE}{\mathrm{CE}\kldivx}
+% \KL{p}{q}, \CE{p}{q}
 
 
 \let\P\relax
@@ -254,7 +255,7 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 \newcommand{\oP}{o_{\operatorname{P}}} % вероятностное о-малое
 
 
-% красиво работают: \P(A), \P(A|B), \E(X), \H(X), \E(X|A), \H(X|Y)
+% красиво работают: \P(A), \P(A|B), \E(X), \H(X), \E(X|A), \H(X|Y), \Var, \Cov
 % автоматически подбирается размер скобок в аналогичной команде со звёздочкой
 % \P*(A), \P*(A|B), etc
 % просто двойные буквы без всяких скобок \PP, \QQ, 
@@ -355,7 +356,7 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 
 \newcommand{\dTri}{\mathrm{Triangle}}
 \newcommand{\dUnif}{\mathrm{Unif}}
-\newcommand{\dU}{\dUnif}
+\newcommand{\dU}{\mathrm{U}}
 \newcommand{\dCauchy}{\mathrm{Cauchy}}
 \newcommand{\dN}{\mathcal{N}}
 \newcommand{\dLN}{\mathcal{LN}}
@@ -862,8 +863,18 @@ p_{30} = \frac{364}{365}\cdot\frac{363}{365}\cdot\ldots\cdot\frac{332}{336}\appr
 
 
 %TODO Задача о полосе невезения
-%За неделю Аннушка семь раз пролила масло. Какова вероятность того, что она проливала масло каждый день?
+%За неделю Аннушка семь раз пролила масло. 
+% Какова вероятность того, что она проливала масло каждый день?
 %TODO: указать вероятности
+
+\begin{problem}
+% TODO: подумать над формулировкой
+  Случайная величина $X$ может принять любое значение на числовой прямой. 
+
+  Предложите способ описать все вероятности, связанные с этой случайной величиной. 
+\begin{sol}
+\end{sol}
+\end{problem}
 
 
 
