@@ -127,6 +127,7 @@
 \usetikzlibrary{trees} % tikz-прибамбас для рисовки деревьев
 \usepackage{tikz-qtree} % альтернативный tikz-прибамбас для рисовки деревьев
 \usepackage{tkz-graph} % by dp for making prob trees
+\usepackage{tkz-euclide} % for geometry figures
 \usetikzlibrary{arrows} % tikz-прибамбас для рисовки стрелочек подлиннее
 
 \usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
@@ -144,7 +145,11 @@
 % 4. Не сокращайте .1 вместо 0.1
 % 5. Повторяющееся значение повторяйте, а не говорите "то же"
 
-\usepackage{physics}
+% \usepackage{physics}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
 \usepackage{listings}
 \lstset{%
@@ -344,8 +349,12 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 % https://tex.stackexchange.com/questions/389238/is-there-a-black-dot-symbol-that-i-can-use
 \newcommand\vardot[1][.4]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
 % dot above equality sign for Newton style
-%\renewcommand{\doteq}{\mathrel{\overset{\vardot}{=}}}
-\renewcommand{\doteq}{\mathrel{\overset{\lim}{=}}}
+\newcommand{\ulteq}{\mathrel{\overset{\vardot}{=}}}
+\newcommand{\ultsim}{\mathrel{\overset{\vardot}{\sim}}}
+%\newcommand{\ulteq}{\mathrel{\overset{\infty}{=}}}
+%\newcommand{\ultsim}{\mathrel{\overset{\infty}{\sim}}}
+
+% \renewcommand{\doteq}{\mathrel{\overset{\lim}{=}}}
 
 
 
@@ -2793,11 +2802,11 @@ $ 2/3 $, $1/2$, $ 1/2 $, $ 14/27 $
 \begin{leftbar}
 У каждой случайной величины есть \textit{функция распределения}, $F_X(t) = \P(X \leq t)$, $\P(a < X \leq b) = F(b) - F(a)$.
 Если у величины есть \textit{функция плотности}, то
-$f_X(t)$, $\P(X \in [a;b]) = \int_a^b f(t) dt$ или $\P(X \in [x; x+ \Delta]) \doteq f(x) \cdot \Delta$.
+$f_X(t)$, $\P(X \in [a;b]) = \int_a^b f(t) dt$ или $\P(X \in [x; x+ \Delta]) \ulteq f(x) \cdot \Delta$.
 
 
 Здесь мы популяризируем мощный стиль сэра Исаака Ньютона \autocite{newton1999principia} в современных обозначениях!
-Запись $a \doteq b$ означает, что величины $a$ и $b$ предельно равны, то есть $\lim_{\Delta \to 0} \frac{a}{b} = 1$.
+Запись $a \ulteq b$ означает, что величины $a$ и $b$ предельно равны, то есть $\lim_{\Delta \to 0} \frac{a}{b} = 1$.
 
 
 Между функциями распределения и плотности есть связь, $F'(x) = f(x)$, $\int_{-\infty}^x f(t) \, dt = F(x)$.
@@ -3368,8 +3377,50 @@ X, \text{ если } X\geq a.\\
 \end{enumerate}
 
 \begin{sol}
+
+  \begin{tikzpicture}
+    \tkzInit[xmax=5,ymax=5] % limits the size of the axes
+    \tkzDrawX[>=latex]
+    \tkzDrawY[>=latex]
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(5,-0.5){Ab}
+    \tkzDefPoint(3,0){X}
+    \tkzDefPoint(0,3){Y}
+    \tkzDefPoint(-0.5,5){Ac}
+    \tkzDefPoint(2,3){Aprec}
+    \tkzInterLC(O,Aprec)(O,Ab) \tkzGetPoints{antiA}{A}
+    \tkzDefPoint(3,2){Bprec}
+    \tkzInterLC(O,Bprec)(O,Ab) \tkzGetPoints{antiB}{B}
+
+    \tkzDefPointBy[projection = onto O--X](A)\tkzGetPoint{D}
+    \tkzDefPointBy[projection = onto O--X](B)\tkzGetPoint{E}
+    \tkzDefPointBy[projection = onto O--Y](A)\tkzGetPoint{F}
+    \tkzInterLL(A,F)(E,B) \tkzGetPoint{C}
+
+    \tkzLabelPoints(O,A,B,D,E,C)
+    \tkzDrawPoints(O,A,B,D,E,C)
+    \tkzDrawSegment(A,B)
+    \tkzDrawSegment(A,D)
+    \tkzDrawSegment(B,E)
+    \tkzDrawSegment(O,A)
+    \tkzDrawSegment(O,B)
+    \tkzDrawSegment(A,C)
+    \tkzDrawSegment(C,B)
+
+
+    \tkzDrawArc(O,Ab)(Ac)
+
+  \end{tikzpicture}
+
+  Заметим, что $\angle DAB + \angle BAC = \pi/2$, $\angle OAD + \angle DAB \ulteq \pi/2$.
+  Следовательно, $\angle BAC \ulteq \angle OAD$ и два треугольника предельно подобны, $\triangle ACB \ultsim \triangle ADO$.
+  Из подобия следует, что $AB/AO \ulteq AC/AD$, $AB \ulteq AO \cdot AC/AD = \frac{1}{\sqrt{1 - x^2}}\Delta$.
   \[
-  \P(X \in [x; x + \Delta]) = \frac{1}{\sqrt{1 - x^2}}\Delta + o(\Delta).
+  \P(X \in [x; x + \Delta]) = \frac{1}{\sqrt{1 - x^2}}\Delta + o(\Delta), \quad 
+  f(x) = \begin{cases}
+    \frac{1}{\sqrt{1 - x^2}}, x \in [-1;1] \\
+    0, \text{ иначе}.
+  \end{cases}
   \]
 \end{sol}
 \end{problem}
@@ -5500,9 +5551,9 @@ $\P(X=x)$ & $1/2$ & $1/8$ & $1/8$ & $1/4$ \\
 \end{tabular}
   
 \begin{enumerate}
-  \item Какое количество бит используется на передачу каждого значения $X$ в оптимально кодировке?
+  \item Какое количество бит используется на передачу каждого значения $X$ в оптимальной кодировке?
   \item Предложите одну из возможных оптимальных кодировок.
-  \item Найдите ожидаемое количество бит, которое марсоход тратит на одно сообщение, энтропию вероятности $\PP$. 
+  \item Найдите ожидаемое количество бит, которое марсоход тратит на одно сообщение, энтропию величины $X$. 
 \end{enumerate}
 \begin{sol}
 $\log_{1/2} \P(X=x)$
@@ -5636,6 +5687,39 @@ $\QQ(X=x)$ & $1/4$ & $1/2$ & $1/8$ & $1/8$ \\
   
   \begin{sol}
   \end{sol}
+\end{problem}
+  
+\begin{problem}
+Джо подбрасывает монетку до первого орла, обозначим $X$ — количество решек, $N$ — общее число бросков.
+
+Найдите энтропии $\H(X)$ и $\H(N)$
+\begin{sol}
+$\H(X) = \H(N)$.
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Величина $X$ имеет экспоненциальное распределение с параметром $\lambda$. 
+Дискретная величина $Y$ — это округление вверх величины $X$ точностью до $\Delta = 1/n$, 
+формально $Y = \ceil{X / \Delta} \cdot \Delta$ с $\Delta = 1/n$.
+Например, если $X \in (5\Delta; 6\Delta]$, то $Y = 6\Delta$.
+\begin{enumerate}
+  \item Найдите энтропию $\H(X)$.
+  \item На сколько примерно энтропия $\H(Y)$ отличается от энтропии $\H(X)$ при большом $n$?
+\end{enumerate}
+
+\begin{sol}
+$\H(X) = 1 - \ln \lambda$, $\H(Y) \approx \H(X) + \ln n$.
+\end{sol}
+\end{problem}
+
+
+\begin{problem}
+Как связаны между собой энтропии $\H(X)$ и $\H(7X + 777)$ если $X$ — дискретная величина? А если у $X$ есть функция плотности?
+\begin{sol}
+Для дискретной величины $\H(7X + 777) = \H(X)$. 
+Для величины с функцией плотности $\H(7X + 777) = \H(X) + \ln 7$.  
+\end{sol}
 \end{problem}
   
 
