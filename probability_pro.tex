@@ -4820,6 +4820,36 @@ f(x, y) = \begin{cases}
 
 
 
+\begin{problem}
+Найдите функцию плотности суммы\addtag{формула свёртки} $S = X+Y$ для каждого случая:
+
+\begin{enumerate}
+  \item Величины $X$ и $Y$ независимы и равномерны на $[0;1]$;
+  \item Величины $X$ и $Y$ независимы, $X \sim \dExpo(\lambda_x = 1)$, $Y \sim \dExpo(\lambda_y = 2)$;
+  \item Величины $X$ и $Y$ независимы, $X \sim \dUnif[0;1]$, $Y \sim \dExpo(\lambda = 1)$.
+\end{enumerate}
+\begin{sol}
+\begin{enumerate}
+  \item $f(s) = \begin{cases}
+    s, \text{ если } s \in [0;1]; \\
+    2- s, \text{ если } s \in (1; 2]; \\
+    0, \text{ иначе }
+  \end{cases}$
+  \item $f(s) = \begin{cases}
+    2\exp(-s) - 2\exp(-2s), \text{ если } s \geq 0; \\
+    0, \text{ иначе }
+  \end{cases}$
+  \item 
+\end{enumerate}
+\end{sol}
+\end{problem}
+  
+
+
+
+
+
+
 \section{Геометрия}
 
 Минитеория:
