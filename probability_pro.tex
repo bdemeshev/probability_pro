@@ -2746,7 +2746,16 @@ $ 2/3 $, $1/2$, $ 1/2 $, $ 14/27 $
   
 \end{sol}
 \end{problem}
-  
+
+
+
+\begin{problem}
+Какое событие независимо от самого себя?
+\begin{sol}
+  Из условия $\P(A \cap A) = \P(A) \P(A)$ следует, что $\P(A) = 0$ или $\P(A) = 1$.
+\end{sol}
+\end{problem}
+
 \newcommand{\strx}{\textasteriskcentered}
 
 
@@ -7036,8 +7045,154 @@ h_1(t) = 0.7t + 0.3th^2_1(t)
 \end{sol}
 \end{problem}
 
-
+\subsection*{Характеристические функции}
   
+
+\begin{problem}
+Найдите характеристическую функцию для следующих распределений:
+\begin{enumerate}
+  \item Биномиальное $\dBin(n, p)$.
+  \item Пуассоновское $\dPois(\lambda)$.
+  \item Геометрическое $\dGeom(p)$.
+  \item Равномерное $\dUnif[-1;1]$.
+\end{enumerate}
+
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+\begin{enumerate}
+  \item Характеристическая функция $X$ равна $\phi_X(t)$. 
+  Найдите характеристическую функцию $Y = aX + b$, где $a$ и $b$ — некоторые константы.
+  \item Исходя из характеристической функции $\phi(t) = \sin t / t$ равномерного $\dUnif[-1;1]$ распределения, 
+  найдите характеристическую функцию равномерного $\dUnif[a; b]$ распределения.
+  \item Исходя из характеристической функции $\phi(t) = \exp(-t^2/2)$ стандартного нормального распределения, 
+  найдите характеристическую функцию равномерного $\cN(\mu; \sigma^2)$ распределения.
+\end{enumerate}  
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+Цель этого упражнения — вывести характеристическую функцию $\phi(t)$ для стандартного нормального распределения $\cN(0;1)$. 
+
+\begin{enumerate}
+  \item Выпишите характеристическую функцию $\phi(t)$ в виде одного действительного интеграла. 
+  \item Продифференцируйте интеграл по $t$, а затем проинтегрируйте его по частям. 
+  \item Решите дифференциальное уравнение $\phi'(t) = -t \phi(t)$ с начальным условием $\phi(0) = 1$.
+\end{enumerate}
+  
+  \begin{sol}
+    $\phi(t) = \exp(-t^2/2)$
+  \end{sol}
+\end{problem}
+
+
+
+
+\begin{problem}
+Используя свойства характеристических функций, докажите, что следующие семейства распределений замкнуты относительно сложения.
+То есть, если величины $X$ и $Y$ независимы и принадлежат данному классу, то их сумма $X + Y$ тоже принадлежит данному классу.  
+\begin{enumerate}
+  \item Биномиальное $\dBin(n, p)$ при фиксированном $p$.
+  \item Пуассоновское $\dPois(\lambda)$.
+  \item Нормальное $\cN(0; \sigma^2)$.
+  \item Нормальное $\cN(\mu; \sigma^2)$.
+  \item Гамма $\dGamma(a, b)$ при фиксированном $b$.
+  \item Отрицательное биномиальное $\dNBin(r, p)$ при фиксированном $p$.
+\end{enumerate}
+
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+По характеристической функции восстановите закон распределения и укажите математическое ожидание случайной величины.
+\begin{enumerate}
+  \item $\phi(t) = \exp(-10t^2)$;
+  \item $\phi(t) = 0.3  + 0.5 \exp(2it) + 0.2 \exp(-3it)$;
+  \item $\phi(t) = 0.7 \sin (t) / t + 0.3 \exp(it)$;
+  \item $\phi(t) = 2 / (3\exp(it) - 1)$;
+  \item $\phi(t) = 2 (1 - \cos t)/ t^2$;
+\end{enumerate}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Величина $X_n$ имеет биномиальное распределение $\dBin(n, p)$ с $p \in (0;1)$, а $Y_n = (X_n - \E X_n) / \sqrt{\Var X_n}$.
+
+  \begin{enumerate}
+    \item Найдите характеристическую функцию $X_n$, $\alpha_n(t)$.
+    \item Найдите характеристическую функцию $Y_n$, $\beta_n(t)$.
+    \item Найдите предел $\beta_n(t)$ при $t\to \infty$.
+  \end{enumerate}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+  Величина $X_n$ имеет пуассоновское распределение $\dPois(\lambda)$, а $Y_n = (X_n - \E X_n) / \sqrt{\Var X_n}$.
+
+  \begin{enumerate}
+    \item Найдите характеристическую функцию $X_n$, $\alpha_n(t)$.
+    \item Найдите характеристическую функцию $Y_n$, $\beta_n(t)$.
+    \item Найдите предел $\beta_n(t)$ при $t\to \infty$.
+  \end{enumerate}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+\begin{problem}
+  Величина $X_n$ имеет отрицательное биномиальное распределение $\dNBin(n, p)$, а $Y_n = (X_n - \E X_n) / \sqrt{\Var X_n}$.
+
+  \begin{enumerate}
+    \item Найдите характеристическую функцию $X_n$, $\alpha_n(t)$.
+    \item Найдите характеристическую функцию $Y_n$, $\beta_n(t)$.
+    \item Найдите предел $\beta_n(t)$ при $t\to \infty$.
+  \end{enumerate}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+\begin{problem}
+  Величина $X_n$ имеет равномерное распределение $\dUnif[-n;n]$. 
+
+  \begin{enumerate}
+    \item Найдите характеристическую функцию $X_n$, $\alpha_n(t)$.
+    \item Найдите предел $\alpha_n(t)$ при $t\to \infty$.
+    \item Является ли предел $\lim_n \alpha_n(t)$ непрерывным в нуле?
+  \end{enumerate}
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+
+\begin{problem}
+  
+  \begin{sol}
+  
+  \end{sol}
+\end{problem}
+
+
+
 %\section{Заметки от автора}
 
 %\begin{enumerate}
