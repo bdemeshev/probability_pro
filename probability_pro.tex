@@ -64,7 +64,7 @@
 
 \usepackage[nonewpage]{imakeidx} 
 %\indexsetup{level=\section}
-\indexsetup{level=\section,toclevel=section,noclearpage}
+\indexsetup{level=\section,level=subsection,noclearpage}
 \makeindex[intoc,title={Модные хэштэги}] % [title=Модные хэштэги, intoc]
 % TODO: лишняя пустая страница в printindex
 
@@ -172,7 +172,7 @@ keywordstyle=\fontfamily{lmtt}\bfseries
 
 \addbibresource{probability_pro.bib}
 
-\setcounter{tocdepth}{1} % в оглавление оставляем уровень 1
+\setcounter{tocdepth}{2} % в оглавление оставляем уровень 1
 
 \usepackage[titles]{tocloft} % альтернатива tocbasic для настройки toc
 % если нужен subfigure, то у tocloft можно добавить опцию subfigure
@@ -2300,6 +2300,29 @@ $\P(A) = 0.6$, $\E(X \mid A) = (2 + 20)/2 = 11$, $\E(X) = 0.6 \cdot 11 + 0.4 \cd
 \end{problem}
 
 
+\begin{problem}
+С молитвой во славу Будде монах\addtag{герои!монах} отправился на Фудзи в 7 утра и через 10 часов достиг вершины. 
+На следующий день в 7 утра он начал спускаться по тому же маршруту и через 10 часов вернулся в точку старта. 
+Монах шёл с переменной скоростью, иногда отдыхая на своём пути. 
+
+Верно ли, что на склоне Фудзи обязательно найдётся точка, в которой он был в одно и то же время при спуски и при подъёме?
+
+\begin{sol} 
+Графическое решение. Можно нарисовать в осях время суток и высота две кривых линии: кривую подъёма и кривую спуска. 
+Они обязательно пересекутся. 
+
+\begin{minipage}{0.8\linewidth}
+\includegraphics[width=7cm]{figure/monk_fudji_problem.jpg}  
+\end{minipage}
+
+Второе решение. Представим себе, что это два разных человека поднимались и спускались в один и тот же день. 
+Вероятно, впервые эта задача появляется в статье Дункера \autocite{duncker1945problem}.
+\end{sol}
+\end{problem}
+
+
+
+
 \subsection{Разрежем отрезок}
 
 % здесь рождается бета распределение !
@@ -2321,6 +2344,10 @@ $X_{(1)} \leq X_{(2)} \leq \ldots \leq X_{(n)}$.
 \[
 \E(R) = \E(\P(Y \leq R \mid R) ) = \P(Y \leq R).
 \]
+По аналогии,
+\[
+\E(R_1 R_2) = \P(Y_1 \leq R_1, \, Y_2 \leq R_2).
+\]
 \end{leftbar}
 
 
@@ -2340,7 +2367,14 @@ $X_{(1)} \leq X_{(2)} \leq \ldots \leq X_{(n)}$.
 \item Найдите $\Cov(X_{(3)}, X_{(7)})$ при $n = 15$ не используя ни функцию плотности, ни функцию распределения.
 \end{enumerate}
 
-Рассмотрим длины полученных кусочков, $L_1$, $L_2$, \ldots, $L_{n+1}$.
+
+\begin{sol}  
+\end{sol}
+\end{problem}
+
+\begin{problem}
+Величины $X_1$, $X_2$, \ldots, $X_n$ выбираются равномерно на отрезке $[0; 1]$.
+Эти точки разбивают отрезок, считая слева направо, на $n+1$ кусочек: $L_1$, $L_2$, \ldots, $L_{n+1}$.
 \begin{enumerate}[resume]
 \item Правда ли что величины $L_k$ одинаково распределены? Независимы?
 \item Выпишите функцию плотности $f(u)$ величины $L_k$ не используя функцию распределения. 
@@ -2400,26 +2434,6 @@ $X_{(1)} \leq X_{(2)} \leq \ldots \leq X_{(n)}$.
 \end{sol}
 \end{problem}
 
-
-\begin{problem}
-С молитвой во славу Будде монах\addtag{герои!монах} отправился на Фудзи в 7 утра и через 10 часов достиг вершины. 
-На следующий день в 7 утра он начал спускаться по тому же маршруту и через 10 часов вернулся в точку старта. 
-Монах шёл с переменной скоростью, иногда отдыхая на своём пути. 
-
-Верно ли, что на склоне Фудзи обязательно найдётся точка, в которой он был в одно и то же время при спуски и при подъёме?
-
-\begin{sol} 
-Графическое решение. Можно нарисовать в осях время суток и высота две кривых линии: кривую подъёма и кривую спуска. 
-Они обязательно пересекутся. 
-
-\begin{minipage}{0.8\linewidth}
-\includegraphics[width=7cm]{figure/monk_fudji_problem.jpg}  
-\end{minipage}
-
-Второе решение. Представим себе, что это два разных человека поднимались и спускались в один и тот же день. 
-Вероятно, впервые эта задача появляется в статье Дункера \autocite{duncker1945problem}.
-\end{sol}
-\end{problem}
 
 
 
@@ -4074,52 +4088,6 @@ X, \text{ если } X\geq a.\\
 \end{sol}
 \end{problem}
 
-
-
-\newpage
-\section{На отрезке}
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
-  
-
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
-
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
-
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
-
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
-
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
-
-
-\begin{problem}
-\begin{sol}
-\end{sol}
-\end{problem}
 
 
 
